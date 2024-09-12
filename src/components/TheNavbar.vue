@@ -1,9 +1,9 @@
 <script setup>
-import TheArrow from './icons/TheArrow.vue';
 import TheButton from './TheButton.vue';
 import TheFilters from './filter/TheFilters.vue';
 import RegionFilter from './filter/RegionFilter.vue';
 import { ref } from 'vue';
+import FilterBy from './filter/FilterBy.vue';
 const filter = ref({
     region: false,
     price: false,
@@ -15,23 +15,19 @@ const filter = ref({
 
 
 <template>
-    <div class="w-full bg-blue-500 mt-20">
+    <div class="w-full  mt-20">
         <div class="w-full h-12 flex items-center justify-between">
             <div class="font-bold flex items-center relative ">
-                <span @click="() => filter.region = !filter.region"
-                    class="py-2 px-3 flex items-center cursor-pointer ">რეგიონი
-                    <TheArrow class="transition-all" :class="[filter.region ? 'rotate-180' : 'rotate-0']" />
-                </span>
+                <FilterBy @click="() => filter.region = !filter.region"
+                    :class="[filter.region ? 'bg-active-filter' : '']" title="რეგიონი" :filter-by="filter.region" />
                 <RegionFilter v-if="filter.region" />
-                <span class="py-2 px-3 flex items-center">საფასო კატეგორია
-                    <TheArrow />
-                </span>
-                <span class="py-2 px-3 flex items-center">ფართობი
-                    <TheArrow />
-                </span>
-                <span class="py-2 px-3 flex items-center">საძინებლების რაოდენობა
-                    <TheArrow />
-                </span>
+                <FilterBy @click="() => filter.price = !filter.price" :class="[filter.price ? 'bg-active-filter' : '']"
+                    title="საფასო კატეგორია" :filter-by="filter.price" />
+                <FilterBy @click="() => filter.area = !filter.area" :class="[filter.area ? 'bg-active-filter' : '']"
+                    title="ფართობი" :filter-by="filter.area" />
+                <FilterBy @click="() => filter.bedrooms = !filter.bedrooms"
+                    :class="[filter.bedrooms ? 'bg-active-filter' : '']" title="საძინებლების რაოდენობა"
+                    :filter-by="filter.bedrooms" />
             </div>
             <div>
                 <TheButton :background="true" :title="'+ ლისტინგის დამატება'" />
