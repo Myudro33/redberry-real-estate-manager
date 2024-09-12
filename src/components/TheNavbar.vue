@@ -5,6 +5,7 @@ import RegionFilter from './filter/RegionFilter.vue';
 import FilterBy from './filter/FilterBy.vue';
 import { useEstateStore } from '@/stores';
 import PriceAndAreaFilter from './filter/PriceAndAreaFilter.vue';
+import BedroomFilter from './filter/BedroomFilter.vue';
 const estateStore = useEstateStore()
 </script>
 
@@ -29,6 +30,7 @@ const estateStore = useEstateStore()
                 <FilterBy @click="estateStore.filterBy('bedrooms')"
                     :class="[estateStore.filter.bedrooms ? 'bg-active-filter' : '']" title="საძინებლების რაოდენობა"
                     :filter-by="estateStore.filter.bedrooms" />
+                <BedroomFilter v-if="estateStore.filter.bedrooms" />
             </div>
             <div>
                 <TheButton :background="true" :title="'+ ლისტინგის დამატება'" />
