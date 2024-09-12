@@ -4,7 +4,9 @@ export default {
   theme: {
     extend: {
       colors: {
-        'border-color': '#DBDBDB'
+        'border-color': '#DBDBDB',
+        'button-background': '#F93B1D',
+        'button-background-hover': '#DF3014'
       }
     }
   },
