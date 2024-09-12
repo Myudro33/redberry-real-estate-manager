@@ -4,6 +4,7 @@ import TheFilters from './filter/TheFilters.vue';
 import RegionFilter from './filter/RegionFilter.vue';
 import FilterBy from './filter/FilterBy.vue';
 import { useEstateStore } from '@/stores';
+import PriceAndAreaFilter from './filter/PriceAndAreaFilter.vue';
 const estateStore = useEstateStore()
 </script>
 
@@ -20,9 +21,11 @@ const estateStore = useEstateStore()
                 <FilterBy @click="estateStore.filterBy('price')"
                     :class="[estateStore.filter.price ? 'bg-active-filter' : '']" title="საფასო კატეგორია"
                     :filter-by="estateStore.filter.price" />
+                <PriceAndAreaFilter v-if="estateStore.filter.price" filter-type="price" />
                 <FilterBy @click="estateStore.filterBy('area')"
                     :class="[estateStore.filter.area ? 'bg-active-filter' : '']" title="ფართობი"
                     :filter-by="estateStore.filter.area" />
+                <PriceAndAreaFilter v-if="estateStore.filter.area" filter-type="area" />
                 <FilterBy @click="estateStore.filterBy('bedrooms')"
                     :class="[estateStore.filter.bedrooms ? 'bg-active-filter' : '']" title="საძინებლების რაოდენობა"
                     :filter-by="estateStore.filter.bedrooms" />
