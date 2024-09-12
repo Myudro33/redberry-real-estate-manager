@@ -2,14 +2,9 @@
 import TheButton from './TheButton.vue';
 import TheFilters from './filter/TheFilters.vue';
 import RegionFilter from './filter/RegionFilter.vue';
-import { ref } from 'vue';
 import FilterBy from './filter/FilterBy.vue';
-const filter = ref({
-    region: false,
-    price: false,
-    area: false,
-    bedrooms: false
-})
+import { useEstateStore } from '@/stores';
+const estateStore = useEstateStore()
 </script>
 
 
@@ -18,16 +13,19 @@ const filter = ref({
     <div class="w-full  mt-20">
         <div class="w-full h-12 flex items-center justify-between">
             <div class="font-bold flex items-center relative ">
-                <FilterBy @click="() => filter.region = !filter.region"
-                    :class="[filter.region ? 'bg-active-filter' : '']" title="რეგიონი" :filter-by="filter.region" />
-                <RegionFilter v-if="filter.region" />
-                <FilterBy @click="() => filter.price = !filter.price" :class="[filter.price ? 'bg-active-filter' : '']"
-                    title="საფასო კატეგორია" :filter-by="filter.price" />
-                <FilterBy @click="() => filter.area = !filter.area" :class="[filter.area ? 'bg-active-filter' : '']"
-                    title="ფართობი" :filter-by="filter.area" />
-                <FilterBy @click="() => filter.bedrooms = !filter.bedrooms"
-                    :class="[filter.bedrooms ? 'bg-active-filter' : '']" title="საძინებლების რაოდენობა"
-                    :filter-by="filter.bedrooms" />
+                <FilterBy @click="estateStore.filterBy('region')"
+                    :class="[estateStore.filter.region ? 'bg-active-filter' : '']" title="რეგიონი"
+                    :filter-by="estateStore.filter.region" />
+                <RegionFilter v-if="estateStore.filter.region" />
+                <FilterBy @click="estateStore.filterBy('price')"
+                    :class="[estateStore.filter.price ? 'bg-active-filter' : '']" title="საფასო კატეგორია"
+                    :filter-by="estateStore.filter.price" />
+                <FilterBy @click="estateStore.filterBy('area')"
+                    :class="[estateStore.filter.area ? 'bg-active-filter' : '']" title="ფართობი"
+                    :filter-by="estateStore.filter.area" />
+                <FilterBy @click="estateStore.filterBy('bedrooms')"
+                    :class="[estateStore.filter.bedrooms ? 'bg-active-filter' : '']" title="საძინებლების რაოდენობა"
+                    :filter-by="estateStore.filter.bedrooms" />
             </div>
             <div>
                 <TheButton :background="true" :title="'+ ლისტინგის დამატება'" />
