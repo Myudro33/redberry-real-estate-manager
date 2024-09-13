@@ -33,7 +33,7 @@ const estateStore = useEstateStore()
                 <BedroomFilter v-if="estateStore.filter.bedrooms" />
             </div>
             <div>
-                <TheButton :background="true" :title="'+ ლისტინგის დამატება'" />
+                <TheButton router-to="add-listing" type="link" :background="true" :title="'+ ლისტინგის დამატება'" />
                 <TheButton class="ml-4" :background="false" :title="'+ აგენტის დამატება'" />
             </div>
         </div>
