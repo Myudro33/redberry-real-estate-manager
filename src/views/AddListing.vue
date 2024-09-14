@@ -72,7 +72,7 @@ onMounted(() => {
         estateStore.getCities()
     }
 })
-function onSubmit(values) {
-    alert(JSON.stringify(values, null, 2));
+function onSubmit() {
+    estateStore.addListing(data.value)
 }
 </script>

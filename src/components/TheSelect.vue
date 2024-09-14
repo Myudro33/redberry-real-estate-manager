@@ -11,13 +11,13 @@
         <Field @change="change" v-else-if="props.label == 'ქალაქი'" as="select" validate-on-input
             class="h-11 p-2 shrink-0 rounded-lg border border-border-color" :name="props.name" :value="modelValue">
             <option value="" selected disabled>Select a city</option>
-            <option v-for="city in estateStore.cities" :key="city.id" :value="city.name">
+            <option v-for="city in estateStore.cities" :key="city.id" :value="city.id">
                 {{ city.name }}</option>
         </Field>
         <Field @change="change" v-else as="select" validate-on-input
             class="h-11 p-2 shrink-0 rounded-lg border border-border-color" :name="props.name" :value="modelValue">
             <option value="" selected disabled>Select an agent</option>
-            <option v-for="agent in estateStore.agents" :key="agent.id" :value="agent.name">
+            <option v-for="agent in estateStore.agents" :key="agent.id" :value="agent.id">
                 {{ agent.name }}</option>
         </Field>
         <ErrorMessage :name="props.name" class="text-error" />

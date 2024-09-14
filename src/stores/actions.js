@@ -1,5 +1,24 @@
 import axios from 'axios'
 export default {
+  async addListing(data) {
+    const formData = new FormData()
+    formData.append('address', data.address)
+    formData.append('image', data.file[0])
+    formData.append('region_id', data.region)
+    formData.append('description', data.description)
+    formData.append('city_id', data.city)
+    formData.append('zip_code', data.postalCode)
+    formData.append('price', data.price)
+    formData.append('area', data.area)
+    formData.append('bedrooms', data.bedrooms)
+    formData.append('is_rental', data.listing_type)
+    formData.append('agent_id', data.agent)
+    axios.post('https://api.real-estate-manager.redberryinternship.ge/api/real-estates', formData, {
+      headers: {
+        Authorization: `Bearer 9d016a33-abca-47eb-b541-400bdcf71b68`
+      }
+    })
+  },
   convertBlobToBase64(blob) {
     return new Promise((resolve, reject) => {
       const reader = new FileReader()

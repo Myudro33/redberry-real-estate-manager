@@ -83,7 +83,7 @@ const removeImage = () => {
 const loadImageFromLocalStorage = () => {
     const base64Image = localStorage.getItem('image');
     if (base64Image) {
-        estateStore.urltoFile(base64Image, 'imagename', 'image');
+        estateStore.urltoFile(base64Image, 'imagename', 'image/jpeg');
     }
 };
 onMounted(() => {

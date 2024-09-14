@@ -7,8 +7,9 @@ export const schema = {
   },
   file: (value) => {
     if (!value) return 'No file selected'
-    const fileSizeMB = value[0].size / (1024 * 1024)
-    return fileSizeMB <= 1 ? true : `File must be less than or equal to 1 MB`
+    return true
+    // const fileSizeMB = value[0].size / (1024 * 1024)
+    // return fileSizeMB <= 1 ? true : `File must be less than or equal to 1 MB`
   },
   address: (value) => {
     if (value) {
