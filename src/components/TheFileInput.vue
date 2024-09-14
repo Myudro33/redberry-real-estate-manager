@@ -11,12 +11,12 @@
                 <label
                     class="text-xl relative w-full h-full flex justify-center items-center cursor-pointer rounded-md "
                     for="dropzoneFile">
-                    <div @click.stop class="">
+                    <div @click.stop>
                         <TrashCanIcon @click="removeImage" class="absolute translate-x-16 translate-y-16 cursor-pointer"
-                            v-if="dropzoneFile.name" />
-                        <img v-if="dropzoneFile.name" class="w-20 h-20 rounded-md" :src="file" alt="created image">
+                            v-if="file" />
+                        <img v-if="file" class="w-20 h-20 rounded-md" :src="file" alt="created image">
                     </div>
-                    <PlusIcon v-if="!dropzoneFile.name" />
+                    <PlusIcon v-if="!file" />
                 </label>
                 <input accept=".jpg,.jpeg,.png" name='file' v-if="!dropzoneFile.name" @input="selectedFile"
                     class="hidden" type="file" id="dropzoneFile" />
@@ -28,21 +28,18 @@
 
 <script setup>
 import { ErrorMessage, Field } from "vee-validate";
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import PlusIcon from "./icons/PlusIcon.vue";
 import TrashCanIcon from "./icons/TrashCanIcon.vue";
+import useLocalStorage from "@/composables/useLocalStorage";
+import { useEstateStore } from "@/stores";
 const active = ref(false);
 const dropzoneFile = ref("");
-const file = ref('')
+const file = ref(JSON.parse(localStorage.getItem('file')) || "")
 const emit = defineEmits(["selectFile"]);
 const props = defineProps(["image"]);
-const required = () => {
-    if (dropzoneFile.value !== "") {
-        return true;
-    }
-    return false;
-};
-const toggleActive = (e) => {
+const estateStore = useEstateStore()
+const toggleActive = async (e) => {
     active.value = !active.value;
     dropzoneFile.value = e.dataTransfer.files[0];
     emit("selectFile", dropzoneFile);
@@ -54,6 +51,10 @@ const toggleActive = (e) => {
         lastModified: 1701010799085
     });
     file.value = URL.createObjectURL(newFile);
+    const base64Data = await estateStore.convertBlobToBase64(newFile);
+    useLocalStorage(base64Data, 'image');
+    useLocalStorage(file.value, 'file')
+
 };
 const selectedFile = (e) => {
     dropzoneFile.value = e.target.files[0];
@@ -66,11 +67,26 @@ const selectedFile = (e) => {
         lastModified: 1701010799085
     });
     file.value = URL.createObjectURL(newFile);
+    const base64Data = estateStore.convertBlobToBase64(newFile);
+    console.log(base64Data);
+    useLocalStorage(base64Data, 'image');
+    useLocalStorage(file.value, 'file')
 };
 const removeImage = () => {
     setTimeout(() => {
         file.value = ''
         dropzoneFile.value = ''
+        useLocalStorage('', 'image');
+        useLocalStorage('', 'file')
     });
 }
+const loadImageFromLocalStorage = () => {
+    const base64Image = localStorage.getItem('image');
+    if (base64Image) {
+        estateStore.urltoFile(base64Image, 'imagename', 'image');
+    }
+};
+onMounted(() => {
+    loadImageFromLocalStorage();
+})
 </script>
