@@ -3,7 +3,7 @@ export const schema = {
     if (value) {
       return true
     }
-    return 'You must choose a drink'
+    return 'You must choose a deal'
   },
   file: (value) => {
     if (!value) return 'No file selected'
