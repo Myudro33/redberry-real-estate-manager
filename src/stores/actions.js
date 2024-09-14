@@ -9,6 +9,17 @@ export default {
       }
     }
   },
+  async getAgents() {
+    const response = await axios.get(
+      'https://api.real-estate-manager.redberryinternship.ge/api/agents',
+      {
+        headers: {
+          Authorization: `Bearer 9d016a33-abca-47eb-b541-400bdcf71b68`
+        }
+      }
+    )
+    this.agents = response.data
+  },
   async getCities() {
     const response = await axios.get(
       'https://api.real-estate-manager.redberryinternship.ge/api/cities'
