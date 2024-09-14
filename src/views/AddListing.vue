@@ -50,6 +50,7 @@ import TheButton from '@/components/TheButton.vue';
 import { useEstateStore } from '@/stores';
 import { onMounted, ref } from 'vue';
 import TheRadio from '@/components/TheRadio.vue';
+import router from '@/router';
 const estateStore = useEstateStore()
 const data = ref({
     listing_type: JSON.parse(localStorage.getItem('deal')) || "",
@@ -74,5 +75,6 @@ onMounted(() => {
 })
 function onSubmit() {
     estateStore.addListing(data.value)
+    router.push({ name: 'home' })
 }
 </script>
