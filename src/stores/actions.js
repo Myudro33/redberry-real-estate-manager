@@ -1,5 +1,16 @@
 import axios from 'axios'
 export default {
+  async getListing() {
+    const response = await axios.get(
+      'https://api.real-estate-manager.redberryinternship.ge/api/real-estates',
+      {
+        headers: {
+          Authorization: `Bearer 9d016a33-abca-47eb-b541-400bdcf71b68`
+        }
+      }
+    )
+    this.listings = response.data
+  },
   async addListing(data) {
     const formData = new FormData()
     formData.append('address', data.address)
