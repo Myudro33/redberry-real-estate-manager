@@ -1,5 +1,18 @@
 import axios from 'axios'
 export default {
+  convertBlobToBase64(blob) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader()
+      reader.onloadend = () => resolve(reader.result)
+      reader.onerror = reject
+      reader.readAsDataURL(blob)
+    })
+  },
+  async urltoFile(url, filename, mimeType) {
+    const res = await fetch(url)
+    const buf = await res.arrayBuffer()
+    return new File([buf], filename, { type: mimeType })
+  },
   filterBy(state) {
     for (const key in this.filter) {
       if (key === state) {

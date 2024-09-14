@@ -6,7 +6,7 @@ export const useEstateStore = defineStore('estateStore', {
     return {
       regions: [],
       agents: [],
-      region_id: '',
+      region_id: JSON.parse(localStorage.getItem('region')) || '',
       cities: [],
       filter: {
         region: false,
