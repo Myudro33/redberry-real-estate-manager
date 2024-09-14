@@ -9,6 +9,12 @@ export default {
       }
     }
   },
+  async getCities() {
+    const response = await axios.get(
+      'https://api.real-estate-manager.redberryinternship.ge/api/cities'
+    )
+    this.cities = response.data.filter((city) => city.region_id == this.region_id)
+  },
   async getRegions() {
     const response = await axios.get(
       'https://api.real-estate-manager.redberryinternship.ge/api/regions'
