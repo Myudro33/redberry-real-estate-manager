@@ -2,7 +2,7 @@ import axios from 'axios'
 export default {
   filterListingByRegion(id) {
     this.loading = true
-    const test = this.listings.filter((item) => item.city.region.region_id == id)
+    const test = this.listings.filter((item) => item.city.region_id == id)
     this.filteredListing = test
     this.loading = false
   },
@@ -17,7 +17,7 @@ export default {
       }
     )
     this.singleListing = response.data
-    this.filterListingByRegion(response.data.city.region.region_id)
+    this.filterListingByRegion(response.data.city.region_id)
   },
   async getListing() {
     const response = await axios.get(
@@ -43,11 +43,16 @@ export default {
     formData.append('bedrooms', data.bedrooms)
     formData.append('is_rental', data.listing_type)
     formData.append('agent_id', data.agent)
-    axios.post('https://api.real-estate-manager.redberryinternship.ge/api/real-estates', formData, {
-      headers: {
-        Authorization: `Bearer 9d016a33-abca-47eb-b541-400bdcf71b68`
+    const response = await axios.post(
+      'https://api.real-estate-manager.redberryinternship.ge/api/real-estates',
+      formData,
+      {
+        headers: {
+          Authorization: `Bearer 9d016a33-abca-47eb-b541-400bdcf71b68`
+        }
       }
-    })
+    )
+    this.listings.push(response.data)
   },
   convertBlobToBase64(blob) {
     return new Promise((resolve, reject) => {
