@@ -1,5 +1,15 @@
 <script setup>
-const props = defineProps(['background', 'title', 'type', 'routerTo'])
+import { useEstateStore } from '@/stores';
+import { useRouter } from 'vue-router';
+const props = defineProps(['background', 'title', 'type', 'routerTo', 'query'])
+const router = useRouter()
+const estateStore = useEstateStore()
+const click = () => {
+    if (props.query != '') {
+        estateStore.changeModal('agent')
+        router.push({ path: '/', query: { modal: props.query } })
+    }
+}
 </script>
 
 <template>
@@ -7,7 +17,7 @@ const props = defineProps(['background', 'title', 'type', 'routerTo'])
         :class="[props.background ? 'text-white bg-button-background hover:bg-button-background-hover' : 'bg-transparent hover:bg-button-background border border-button-background text-button-background hover:text-white']"
         class="px-4 py-[10px] h-12 text-base font-medium rounded-[10px]">{{ props.title
         }}</router-link>
-    <button v-else type="submit"
+    <button @click="click" v-else type="submit"
         :class="[props.background ? 'text-white bg-button-background hover:bg-button-background-hover' : 'bg-transparent hover:bg-button-background border border-button-background text-button-background hover:text-white']"
         class="px-4 py-[10px] h-12 text-base font-medium rounded-[10px]">{{ props.title }}
     </button>

@@ -34,7 +34,7 @@ const estateStore = useEstateStore()
             </div>
             <div>
                 <TheButton router-to="add-listing" type="link" :background="true" :title="'+ ლისტინგის დამატება'" />
-                <TheButton class="ml-4" :background="false" :title="'+ აგენტის დამატება'" />
+                <TheButton class="ml-4" :background="false" :title="'+ აგენტის დამატება'" query="agent" />
             </div>
         </div>
     </div>

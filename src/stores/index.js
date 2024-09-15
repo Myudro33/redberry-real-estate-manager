@@ -4,6 +4,7 @@ import actions from './actions'
 export const useEstateStore = defineStore('estateStore', {
   state: () => {
     return {
+      modal: false,
       loading: true,
       filteredListing: [],
       singleListing: [],
