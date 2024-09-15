@@ -1,13 +1,23 @@
 <script setup>
 import { useEstateStore } from '@/stores';
-import { useRouter } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 const props = defineProps(['background', 'title', 'type', 'routerTo', 'query'])
 const router = useRouter()
+const route = useRoute()
 const estateStore = useEstateStore()
 const click = () => {
-    if (props.query) {
+    if (props.query === 'agent') {
         estateStore.changeModal('agent')
         router.push({ path: '/', query: { modal: props.query } })
+    }
+    else if (props.query === 'remove-listing') {
+        estateStore.removeListing(route.params.id)
+        estateStore.changeModal(false)
+        router.push({ name: 'home' })
+    }
+    else {
+        estateStore.changeModal(false)
+        router.push({ query: null })
     }
 }
 </script>

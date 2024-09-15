@@ -45,6 +45,9 @@ onMounted(() => {
                 </span>
                 <p class="text-base text-gray-text font-normal mt-10 ">{{ estateStore.singleListing.description }}</p>
                 <AgentCard :agent="estateStore.singleListing.agent" />
+                <button @click="removeListing(estateStore.singleListing.id)"
+                    class="p-2 border border-[#676E76] text-[#676E76] rounded-lg w-36 mt-5 text-xs">ლისტინგის
+                    წაშლა</button>
             </div>
         </div>
         <div class="w-[52.4rem] flex justify-end text-gray-text mt-2">გამოქვეყნების თარიღი

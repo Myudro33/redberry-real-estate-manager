@@ -1,6 +1,8 @@
 <template>
-    <div v-if="estateStore.modal == 'agent'" @click="closeModal" class="modal-overlay">
+    <div v-if="estateStore.modal == 'agent' || estateStore.modal == 'remove-listing'" @click="closeModal"
+        class="modal-overlay">
         <AddAgentForm @click.stop v-if="estateStore.modal == 'agent'" />
+        <RemoveListing v-else />
     </div>
 </template>
 
@@ -8,10 +10,11 @@
 import { useEstateStore } from '@/stores';
 import { useRouter } from 'vue-router';
 import AddAgentForm from './AddAgentForm.vue';
+import RemoveListing from './RemoveListing.vue';
 const estateStore = useEstateStore()
 const router = useRouter()
 const closeModal = () => {
-    router.push({ name: 'home' })
+    router.push({ query: null })
     estateStore.changeModal(false)
 }
 </script>
