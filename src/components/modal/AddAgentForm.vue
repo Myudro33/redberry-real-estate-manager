@@ -5,6 +5,9 @@ import { ref } from 'vue';
 import TheFileInput from '../TheFileInput.vue';
 import TheButton from '../TheButton.vue';
 import { agentSchema } from '@/config/vee-validate/rules';
+import { useEstateStore } from '@/stores';
+import { useRouter } from 'vue-router';
+const router = useRouter()
 const data = ref({
     name: JSON.parse(localStorage.getItem('name')) || "",
     surname: JSON.parse(localStorage.getItem('surname')) || "",
@@ -12,9 +15,15 @@ const data = ref({
     number: JSON.parse(localStorage.getItem('number')) || "",
     file: JSON.parse(localStorage.getItem('file')) || ""
 })
-
+const estateStore = useEstateStore()
 const addAgent = () => {
-    console.log('hi');
+    estateStore.addAgent(data.value)
+    localStorage.clear()
+    router.push({ name: 'home' })
+
+}
+const closeModal = () => {
+    estateStore.modal = false
 }
 
 </script>
@@ -31,10 +40,9 @@ const addAgent = () => {
                 <TheFileInput v-model="data.file" name="file" />
             </div>
             <div class="w-full flex justify-end mt-20">
-                <TheButton router-to="home" type="link" title="გაუქმება" />
+                <TheButton @click="closeModal" router-to="home" type="link" title="გაუქმება" />
                 <TheButton class="ml-4" :background="true" title="დამატე აგენტი" query="" />
             </div>
-
         </Form>
     </div>
 </template>

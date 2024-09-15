@@ -1,5 +1,22 @@
 import axios from 'axios'
 export default {
+  addAgent(data) {
+    const formData = new FormData()
+    formData.append('name', data.name)
+    formData.append('surname', data.surname)
+    formData.append('email', data.email)
+    formData.append('phone', data.number)
+    formData.append('avatar', data.file[0])
+    axios.post('https://api.real-estate-manager.redberryinternship.ge/api/agents', formData, {
+      headers: {
+        Authorization: `Bearer 9d016a33-abca-47eb-b541-400bdcf71b68`
+      }
+    })
+    this.modal = false
+  },
+  changeModal(state) {
+    this.modal = state
+  },
   filterListingByRegion(id) {
     this.loading = true
     const test = this.listings.filter((item) => item.city.region_id == id)
