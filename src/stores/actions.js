@@ -1,5 +1,16 @@
 import axios from 'axios'
 export default {
+  async getSingleListing(id) {
+    const response = await axios.get(
+      `https://api.real-estate-manager.redberryinternship.ge/api/real-estates/${id}`,
+      {
+        headers: {
+          Authorization: `Bearer 9d016a33-abca-47eb-b541-400bdcf71b68`
+        }
+      }
+    )
+    this.singleListing = response.data
+  },
   async getListing() {
     const response = await axios.get(
       'https://api.real-estate-manager.redberryinternship.ge/api/real-estates',
