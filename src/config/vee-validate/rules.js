@@ -37,7 +37,7 @@ export const agentSchema = {
   },
   file: (value) => {
     if (!value) return 'აირჩიეთ ფაილი'
-    else if (!value.startsWith('blob')) {
+    else if (typeof value !== 'string') {
       const fileSizeMB = value[0].size / (1024 * 1024)
       return fileSizeMB <= 1 ? true : `სურათი უნდა იყოს 1მბ-ზე ნაკლები`
     }
@@ -54,7 +54,7 @@ export const schema = {
   },
   file: (value) => {
     if (!value) return 'აირჩიეთ ფაილი'
-    else if (!value.startsWith('blob')) {
+    else if (typeof value !== 'string') {
       const fileSizeMB = value[0].size / (1024 * 1024)
       return fileSizeMB <= 1 ? true : `სურათი უნდა იყოს 1მბ-ზე ნაკლები`
     }
