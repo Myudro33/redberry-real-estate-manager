@@ -76,5 +76,6 @@ onMounted(() => {
 function onSubmit() {
     estateStore.addListing(data.value)
     router.push({ name: 'home' })
+    localStorage.clear()
 }
 </script>
