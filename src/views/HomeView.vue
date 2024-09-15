@@ -12,10 +12,10 @@ onMounted(() => {
 <template>
   <div class="w-full px-40 pb-20">
     <TheNavbar />
-    <div class="flex justify-between flex-wrap gap-3 mt-8">
+    <div class="flex flex-wrap gap-3 mt-8">
       <ListingCard v-for="items in estateStore.listings" :key="items.id" :area="items.area" :bedrooms="items.bedrooms"
         :deal="items.is_rental" :id="items.id" :image="items.image" :location="items.address"
-        :postal-code="items.zip_code" :price="items.price" />
+        :postal-code="items.zip_code" :price="items.price" :city="items.city.name" />
     </div>
   </div>
 </template>

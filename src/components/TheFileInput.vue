@@ -68,7 +68,6 @@ const selectedFile = (e) => {
     });
     file.value = URL.createObjectURL(newFile);
     const base64Data = estateStore.convertBlobToBase64(newFile);
-    console.log(base64Data);
     useLocalStorage(base64Data, 'image');
     useLocalStorage(file.value, 'file')
 };

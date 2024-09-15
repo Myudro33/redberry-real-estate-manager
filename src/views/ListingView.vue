@@ -19,7 +19,7 @@ onMounted(() => {
 
 <template>
     <h1 class="text-5xl text-center font-bold" v-if="estateStore.loading">loading...</h1>
-    <div v-else-if="estateStore.filteredListing.length > 0" class="px-40 py-16">
+    <div v-else-if="estateStore.singleListing.id" class="px-40 py-16">
         <router-link :to="{ name: 'home' }">
             <ArrowIcon />
         </router-link>

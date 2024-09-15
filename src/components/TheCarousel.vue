@@ -1,12 +1,15 @@
 <template>
-    <div class="mt-[4.19rem] w-full relative">
+    <h1 v-if="!estateStore.filteredListing.length > 0" class="text-[#021526] text-[2rem] mt-10 font-medium">ბინები
+        მსგავს
+        ლოკაციაზე არ მოიძებნა</h1>
+    <div v-else class="mt-[4.19rem] w-full relative">
         <h1 class="text-[#021526] text-[2rem] font-medium">ბინები მსგავს ლოკაციაზე</h1>
         <div class="carousel-container w-full mt-[3.25rem]" @mouseover="pauseAutoSlide" @mouseleave="startAutoSlide">
             <div class="carousel" :style="{ transform: `translateX(${-translateX}px)` }">
                 <div class="carousel-item" v-for="items in displayItems" :key="items.id">
                     <ListingCard :area="items.area" :bedrooms="items.bedrooms" :deal="items.is_rental" :id="items.id"
                         :image="items.image" :location="items.address" :postal-code="items.zip_code"
-                        :price="items.price" />
+                        :price="items.price" :city="items.city.name" />
                 </div>
             </div>
         </div>
