@@ -5,7 +5,7 @@ const props = defineProps(['background', 'title', 'type', 'routerTo', 'query'])
 const router = useRouter()
 const estateStore = useEstateStore()
 const click = () => {
-    if (props.query != '') {
+    if (props.query) {
         estateStore.changeModal('agent')
         router.push({ path: '/', query: { modal: props.query } })
     }

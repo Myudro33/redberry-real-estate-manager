@@ -16,7 +16,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div :class="{ 'overflow-hidden h-screen': estateStore.modal !== '' }">
+  <div :class="{ 'overflow-hidden h-screen': estateStore.modal }">
     <TheHeader />
     <RouterView />
     <ModalContainer />
