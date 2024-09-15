@@ -10,7 +10,7 @@ const prices = ref({
 
 <template>
     <div :class="[props.filterType === 'price' ? 'left-28' : 'left-80']"
-        class="flex flex-col bg-white w-[23.8rem] p-6 rounded-lg border border-border-color shadow-box-shadow h-96 absolute top-14 ">
+        class="flex z-50 flex-col bg-white w-[23.8rem] p-6 rounded-lg border border-border-color shadow-box-shadow h-96 absolute top-14 ">
         <h1 class="fo">{{ props.filterType === 'price' ? 'ფასის მიხედვით' : 'ფართობის მიხედვით' }}</h1>
         <div class="w-full flex justify-between mt-6 text-base font-thin  ">
             <input name="min" v-model="prices.min" class=" w-[9.6rem] h-11 p-2 border border-input-border rounded-md "

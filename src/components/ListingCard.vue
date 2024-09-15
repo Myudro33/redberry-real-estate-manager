@@ -1,6 +1,6 @@
 <template>
     <div @click="openListing"
-        class="w-96 h-[28rem] flex flex-col relative rounded-lg border border-border-color transition-all hover:shadow-lg overflow-hidden">
+        class="w-96 z-0 h-[28rem] flex flex-col relative rounded-lg border border-border-color transition-all hover:shadow-lg overflow-hidden">
         <img class="h-72 object-fill" :src="props.image" alt="listing-image">
         <span
             class="absolute left-5 top-5 flex justify-center items-center text-white font-medium  h-7 p-4 rounded-2xl bg-deal-type">{{
@@ -20,7 +20,7 @@
                 </div>
                 <div class="flex items-center ml-4">
                     <AreaIcon class="mr-1" />
-                    {{ props.area }}
+                    {{ props.area }} მ²
                 </div>
                 <div class="flex items-center ml-4">
                     <PostIcon class="mr-1" />
