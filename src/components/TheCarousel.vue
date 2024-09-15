@@ -25,7 +25,7 @@ import { ref, computed, onMounted, onBeforeUnmount } from 'vue';
 import ListingCard from './ListingCard.vue';
 import ArrowIcon from './icons/ArrowIcon.vue';
 const estateStore = useEstateStore()
-const items = ref(estateStore.listings);
+const items = ref(estateStore.filteredListing);
 const currentIndex = ref(0);
 const translateX = ref(0);
 const itemWidth = 380;
