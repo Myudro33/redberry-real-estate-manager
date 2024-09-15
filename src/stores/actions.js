@@ -1,6 +1,13 @@
 import axios from 'axios'
 export default {
+  filterListingByRegion(id) {
+    this.loading = true
+    const test = this.listings.filter((item) => item.city.region.region_id == id)
+    this.filteredListing = test
+    this.loading = false
+  },
   async getSingleListing(id) {
+    this.loading = true
     const response = await axios.get(
       `https://api.real-estate-manager.redberryinternship.ge/api/real-estates/${id}`,
       {
@@ -10,6 +17,7 @@ export default {
       }
     )
     this.singleListing = response.data
+    this.filterListingByRegion(response.data.city.region.region_id)
   },
   async getListing() {
     const response = await axios.get(
