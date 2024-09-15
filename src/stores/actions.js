@@ -1,5 +1,16 @@
 import axios from 'axios'
 export default {
+  async removeListing(id) {
+    await axios.delete(
+      `https://api.real-estate-manager.redberryinternship.ge/api/real-estates/${id}`,
+      {
+        headers: {
+          Authorization: `Bearer 9d016a33-abca-47eb-b541-400bdcf71b68`
+        }
+      }
+    )
+    this.listings = this.listings.filter((item) => item.id != id)
+  },
   addAgent(data) {
     const formData = new FormData()
     formData.append('name', data.name)
