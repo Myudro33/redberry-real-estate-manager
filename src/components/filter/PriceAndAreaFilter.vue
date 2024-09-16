@@ -7,8 +7,8 @@ const route = useRoute()
 const props = defineProps(['filterType'])
 const emits = defineEmits(['filterPriceOrArea'])
 const prices = ref({
-    min: '',
-    max: ''
+    min: props.filterType === 'price' ? route.query.min_price || "" : route.query.min_area || "",
+    max: props.filterType === 'price' ? route.query.max_price || "" : route.query.max_area || ""
 })
 const fixedPrices = ref([
     { price: 50000 }, { price: 100000 }, { price: 150000 }, { price: 200000 }, { price: 300000 }
