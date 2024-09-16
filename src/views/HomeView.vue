@@ -6,6 +6,7 @@ import { onMounted } from 'vue';
 const estateStore = useEstateStore()
 onMounted(() => {
   estateStore.getListing()
+  estateStore.getRegions()
 })
 </script>
 
