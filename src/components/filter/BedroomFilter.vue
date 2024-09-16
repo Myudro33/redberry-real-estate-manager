@@ -2,11 +2,13 @@
 import { ref } from 'vue';
 import TheButton from '../TheButton.vue';
 import router from '@/router';
+import { useRoute } from 'vue-router';
+const route = useRoute()
 const inputValue = ref('')
 const emits = defineEmits('')
 const submit = () => {
     if (inputValue.value > 0) {
-        router.push({ query: { bedrooms: inputValue.value } })
+        router.push({ query: { ...route.query, bedrooms: inputValue.value } })
     }
     emits('bedrooms', inputValue.value)
 }
