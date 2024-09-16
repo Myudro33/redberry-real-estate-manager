@@ -7,7 +7,7 @@ import { useRoute } from 'vue-router';
 const route = useRoute()
 const estateStore = useEstateStore()
 const emits = defineEmits(['region'])
-const filters = ref([...route.query.regions] || [])
+const filters = ref([...route.query.regions || ''])
 const checked = ref(route.query.regions)
 const filter = (e) => {
     if (filters.value.includes(e.target.value)) {
