@@ -7,7 +7,8 @@ import { useRoute } from 'vue-router';
 const route = useRoute()
 const estateStore = useEstateStore()
 const emits = defineEmits(['region'])
-const filters = ref([])
+const filters = ref([...route.query.regions] || [])
+const checked = ref(route.query.regions)
 const filter = (e) => {
     if (filters.value.includes(e.target.value)) {
         return filters.value.splice(filters.value.indexOf(e.target.value), 1);
@@ -27,7 +28,8 @@ const submit = () => {
         <div class="w-full flex flex-wrap mt-6 ">
             <div class="w-1/3 h-6 flex items-center font-normal text-sm " v-for="item in estateStore.regions"
                 :key="item.id">
-                <input @change="filter" :value="item.name" class="w-5 h-5" type="checkbox" :name="item.name" />
+                <input :checked="checked?.includes(item.name)" @change="filter" :value="item.name" class="w-5 h-5"
+                    type="checkbox" :name="item.name" />
                 <label class="ml-2" :for="item.name">{{ item.name }}</label>
             </div>
         </div>
