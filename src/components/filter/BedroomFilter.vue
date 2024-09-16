@@ -4,7 +4,7 @@ import TheButton from '../TheButton.vue';
 import router from '@/router';
 import { useRoute } from 'vue-router';
 const route = useRoute()
-const inputValue = ref('')
+const inputValue = ref(route.query.bedrooms || "")
 const emits = defineEmits('')
 const submit = () => {
     if (inputValue.value > 0) {
