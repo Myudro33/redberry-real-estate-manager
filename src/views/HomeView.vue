@@ -3,8 +3,10 @@ import ListingCard from '@/components/ListingCard.vue';
 import TheNavbar from '@/components/TheNavbar.vue';
 import { useEstateStore } from '@/stores';
 import { computed, onMounted, ref } from 'vue';
+import { useRoute } from 'vue-router';
+const router = useRoute()
 const estateStore = useEstateStore()
-const bedrooms = ref('')
+const bedrooms = ref(router.query.bedrooms || "")
 const regions = ref([])
 const price = ref({ min: 0, max: 0 })
 const area = ref({ min: 0, max: 0 })

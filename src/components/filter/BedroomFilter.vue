@@ -1,9 +1,13 @@
 <script setup>
 import { ref } from 'vue';
 import TheButton from '../TheButton.vue';
+import router from '@/router';
 const inputValue = ref('')
 const emits = defineEmits('')
 const submit = () => {
+    if (inputValue.value > 0) {
+        router.push({ query: { bedrooms: inputValue.value } })
+    }
     emits('bedrooms', inputValue.value)
 }
 </script>
