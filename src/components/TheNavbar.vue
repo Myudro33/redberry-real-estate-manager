@@ -7,6 +7,19 @@ import { useEstateStore } from '@/stores';
 import PriceAndAreaFilter from './filter/PriceAndAreaFilter.vue';
 import BedroomFilter from './filter/BedroomFilter.vue';
 const estateStore = useEstateStore()
+const emits = defineEmits(['bedroomQuantity', 'region', 'price', 'area'])
+const submit = (e) => {
+    emits('bedroomQuantity', e)
+}
+const filterRegion = (e) => {
+    emits('region', e)
+}
+const filterPrice = (e) => {
+    emits('price', e)
+}
+const filterArea = (e) => {
+    emits('area', e)
+}
 </script>
 
 
@@ -18,19 +31,21 @@ const estateStore = useEstateStore()
                 <FilterBy @click="estateStore.filterBy('region')"
                     :class="[estateStore.filter.region ? 'bg-active-filter' : '']" title="რეგიონი"
                     :filter-by="estateStore.filter.region" />
-                <RegionFilter v-if="estateStore.filter.region" />
+                <RegionFilter @region="filterRegion" v-if="estateStore.filter.region" />
                 <FilterBy @click="estateStore.filterBy('price')"
                     :class="[estateStore.filter.price ? 'bg-active-filter' : '']" title="საფასო კატეგორია"
                     :filter-by="estateStore.filter.price" />
-                <PriceAndAreaFilter v-if="estateStore.filter.price" filter-type="price" />
+                <PriceAndAreaFilter @filter-price-or-area="filterPrice" v-if="estateStore.filter.price"
+                    filter-type="price" />
                 <FilterBy @click="estateStore.filterBy('area')"
                     :class="[estateStore.filter.area ? 'bg-active-filter' : '']" title="ფართობი"
                     :filter-by="estateStore.filter.area" />
-                <PriceAndAreaFilter v-if="estateStore.filter.area" filter-type="area" />
+                <PriceAndAreaFilter @filter-price-or-area="filterArea" v-if="estateStore.filter.area"
+                    filter-type="area" />
                 <FilterBy @click="estateStore.filterBy('bedrooms')"
                     :class="[estateStore.filter.bedrooms ? 'bg-active-filter' : '']" title="საძინებლების რაოდენობა"
                     :filter-by="estateStore.filter.bedrooms" />
-                <BedroomFilter v-if="estateStore.filter.bedrooms" />
+                <BedroomFilter @bedrooms="submit" v-if="estateStore.filter.bedrooms" />
             </div>
             <div>
                 <TheButton router-to="add-listing" type="link" :background="true" :title="'+ ლისტინგის დამატება'" />
