@@ -2,6 +2,7 @@
 import { ref } from 'vue';
 import TheButton from '../TheButton.vue';
 const props = defineProps(['filterType'])
+const emits = defineEmits(['filterPriceOrArea'])
 const prices = ref({
     min: '',
     max: ''
@@ -14,6 +15,9 @@ const setPrice = (type, quantity) => {
     prices.value[type] = quantity
 }
 
+const submit = () => {
+    emits('filterPriceOrArea', prices.value)
+}
 </script>
 
 <template>
@@ -53,7 +57,7 @@ const setPrice = (type, quantity) => {
             </div>
         </div>
         <div class="w-full flex justify-end mt-auto">
-            <TheButton :background="true" title="არჩევა" />
+            <TheButton @click="submit" :background="true" title="არჩევა" />
         </div>
     </div>
 </template>
