@@ -1,6 +1,9 @@
 <script setup>
 import { ref } from 'vue';
 import TheButton from '../TheButton.vue';
+import router from '@/router';
+import { useRoute } from 'vue-router';
+const route = useRoute()
 const props = defineProps(['filterType'])
 const emits = defineEmits(['filterPriceOrArea'])
 const prices = ref({
@@ -16,6 +19,13 @@ const setPrice = (type, quantity) => {
 }
 
 const submit = () => {
+    if (props.filterType === 'price') {
+        router.push({ query: { ...route.query, min_price: prices.value.min, max_price: prices.value.max } })
+    } else {
+        router.push({
+            query: { ...route.query, min_area: prices.value.min, max_area: prices.value.max }
+        })
+    }
     emits('filterPriceOrArea', prices.value)
 }
 </script>
