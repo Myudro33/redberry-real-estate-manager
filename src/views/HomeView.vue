@@ -7,9 +7,9 @@ import { useRoute } from 'vue-router';
 const router = useRoute()
 const estateStore = useEstateStore()
 const bedrooms = ref(router.query.bedrooms || "")
-const regions = ref([])
-const price = ref({ min: 0, max: 0 })
-const area = ref({ min: 0, max: 0 })
+const regions = ref(router.query.regions || [])
+const price = ref({ min: router.query.min_price || 0, max: router.query.max_price || 0 })
+const area = ref({ min: router.query.min_area || 0, max: router.query.max_area || 0 })
 onMounted(() => {
   estateStore.getListing()
   estateStore.getRegions()

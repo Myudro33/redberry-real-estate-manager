@@ -2,6 +2,9 @@
 import { ref } from 'vue';
 import TheButton from '../TheButton.vue';
 import { useEstateStore } from '@/stores';
+import router from '@/router';
+import { useRoute } from 'vue-router';
+const route = useRoute()
 const estateStore = useEstateStore()
 const emits = defineEmits(['region'])
 const filters = ref([])
@@ -12,6 +15,7 @@ const filter = (e) => {
     return filters.value.push(e.target.value)
 }
 const submit = () => {
+    router.push({ query: { ...route.query, regions: filters.value } })
     emits('region', filters.value)
 }
 </script>
