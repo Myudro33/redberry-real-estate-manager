@@ -6,7 +6,8 @@
         <h1 class="text-xl font-normal mt-4">გსურთ წაშალოთ ლისტინგი?</h1>
         <div class="mt-10">
             <TheButton class="ml-4" :background="false" title="გაუქმება" />
-            <TheButton class="ml-4" :background="true" title="დადასტურება" query="remove-listing" />
+            <TheButton @click="removeListing(estateStore.singleListing.id)" class="ml-4" :background="true"
+                title="დადასტურება" query="remove-listing" />
         </div>
     </div>
 </template>

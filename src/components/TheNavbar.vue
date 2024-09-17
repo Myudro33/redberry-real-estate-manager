@@ -27,7 +27,7 @@ const filterArea = (e) => {
 <template>
     <div class="w-full  mt-20">
         <div class="w-full h-12 flex items-center justify-between">
-            <div class="font-bold flex items-center relative ">
+            <div class="font-bold flex items-center relative rounded-lg border border-border-color ">
                 <FilterBy @click="estateStore.filterBy('region')"
                     :class="[estateStore.filter.region ? 'bg-active-filter' : '']" title="რეგიონი"
                     :filter-by="estateStore.filter.region" />

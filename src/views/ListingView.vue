@@ -15,6 +15,9 @@ onMounted(() => {
     estateStore.getListing()
     estateStore.getSingleListing(router.params.id)
 })
+const openModal = () => {
+    estateStore.changeModal('remove-listing')
+}
 </script>
 
 <template>
@@ -45,7 +48,7 @@ onMounted(() => {
                 </span>
                 <p class="text-base text-gray-text font-normal mt-10 ">{{ estateStore.singleListing.description }}</p>
                 <AgentCard :agent="estateStore.singleListing.agent" />
-                <button @click="removeListing(estateStore.singleListing.id)"
+                <button @click="openModal"
                     class="p-2 border border-[#676E76] text-[#676E76] rounded-lg w-36 mt-5 text-xs">ლისტინგის
                     წაშლა</button>
             </div>
