@@ -9,12 +9,15 @@ const bedroomFilter = ref(route.query.bedrooms || null)
 const areaFilter = ref({ min: route.query.min_area || 0, max: route.query.max_area || 0 })
 const priceFilter = ref({ min: route.query.min_price || 0, max: route.query.max_price || 0 })
 const regionFilter = ref(route.query.regions || [])
+const removeButton = ref(false)
+const emits = defineEmits(['area', 'region', 'price', 'bedroomQuantity'])
 const removeBedroomFilter = () => {
     const { bedrooms, ...remainingQuery } = route.query;
     router.push({
         query: remainingQuery
     });
     bedroomFilter.value = null
+    removeButton.value = false
 }
 const removeAreaFilter = () => {
     const { min_area, max_area, ...remainingQuery } = route.query;
@@ -23,6 +26,7 @@ const removeAreaFilter = () => {
     });
     areaFilter.value.min = 0
     areaFilter.value.max = 0
+    removeButton.value = false
 }
 const removePriceFilter = () => {
     const { min_price, max_price, ...remainingQuery } = route.query;
@@ -31,10 +35,9 @@ const removePriceFilter = () => {
     });
     priceFilter.value.min = 0
     priceFilter.value.max = 0
+    removeButton.value = false
 }
 const removeSingleRegion = (region) => {
-    console.log(region);
-
     const currentArray = route.query.regions ? [...route.query.regions] : [];
     const index = regionFilter.value.indexOf(region)
     if (index >= 0 && index < currentArray.length && typeof regionFilter.value !== 'string') {
@@ -56,7 +59,7 @@ const removeSingleRegion = (region) => {
     } else {
         regionFilter.value = []
     }
-
+    removeButton.value = false
 }
 const removeFilters = () => {
     router.push({ name: 'home' })
@@ -66,22 +69,44 @@ const removeFilters = () => {
     priceFilter.value.min = 0
     priceFilter.value.max = 0
     regionFilter.value = []
+    if (route.query.min_area !== 0 || route.query.max_area !== 0) {
+        emits('area', { min: route.query.min_area || 0, max: route.query.max_area || 0 })
+    }
+    if (route.query.regions) {
+        emits('region', route.query.regions)
+    }
+    if (route.query.min_price !== 0 || route.query.max_price) {
+        emits('price', { min: route.query.min_price || 0, max: route.query.max_price || 0 })
+
+    }
+    if (route.query.bedrooms !== undefined) {
+        emits('bedroomQuantity', route.query.bedrooms)
+    } else {
+        emits('bedroomQuantity', '')
+    }
+    removeButton.value = false
 
 }
 watch(() => route.query, () => {
     bedroomFilter.value = route.query.bedrooms
+    if (route.query.bedrooms) {
+        removeButton.value = true
+    }
     if (route.query.min_area || route.query.max_area) {
+        removeButton.value = true
         areaFilter.value.min = route.query.min_area
         areaFilter.value.max = route.query.max_area
     }
     if (route.query.min_price || route.query.max_price) {
+        removeButton.value = true
         priceFilter.value.min = route.query.min_price
         priceFilter.value.max = route.query.max_price
     }
     if (route.query.regions?.length > 0) {
+        removeButton.value = true
         regionFilter.value = route.query.regions
     }
-}, { immediate: true });
+}, { deep: true });
 
 </script>
 
@@ -101,6 +126,6 @@ watch(() => route.query, () => {
         <span v-else class="flex items-center  rounded-3xl border border-border-color px-2 py-1">{{ regionFilter }}
             <DeleteIcon @click="removeSingleRegion(regionFilter)" class="ml-1" />
         </span>
-        <p @click="removeFilters" class="font-bold ml-4 cursor-pointer">გასუფთავება</p>
+        <p v-if="removeButton" @click="removeFilters" class="font-bold ml-4 cursor-pointer">გასუფთავება</p>
     </div>
 </template>
