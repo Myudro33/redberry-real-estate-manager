@@ -6,6 +6,9 @@ import FilterBy from './filter/FilterBy.vue';
 import { useEstateStore } from '@/stores';
 import PriceAndAreaFilter from './filter/PriceAndAreaFilter.vue';
 import BedroomFilter from './filter/BedroomFilter.vue';
+import { useRoute } from 'vue-router';
+import { watch } from 'vue';
+const route = useRoute()
 const estateStore = useEstateStore()
 const emits = defineEmits(['bedroomQuantity', 'region', 'price', 'area'])
 const submit = (e) => {
@@ -20,6 +23,23 @@ const filterPrice = (e) => {
 const filterArea = (e) => {
     emits('area', e)
 }
+watch(() => route.query, () => {
+    if (route.query.min_area !== 0 || route.query.max_area !== 0) {
+        emits('area', { min: route.query.min_area || 0, max: route.query.max_area || 0 })
+    }
+    if (route.query.regions) {
+        emits('region', route.query.regions)
+    }
+    if (route.query.min_price !== 0 || route.query.max_price) {
+        emits('price', { min: route.query.min_price || 0, max: route.query.max_price || 0 })
+
+    }
+    if (route.query.bedrooms !== undefined || !typeof route.query.bedrooms) {
+        emits('bedroomQuantity', route.query.bedrooms)
+    } else if (route.query.bedrooms === undefined) {
+        emits('bedroomQuantity', '')
+    }
+}, { immediate: true });
 </script>
 
 

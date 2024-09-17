@@ -33,6 +33,8 @@ const removePriceFilter = () => {
     priceFilter.value.max = 0
 }
 const removeSingleRegion = (region) => {
+    console.log(region);
+
     const currentArray = route.query.regions ? [...route.query.regions] : [];
     const index = regionFilter.value.indexOf(region)
     if (index >= 0 && index < currentArray.length && typeof regionFilter.value !== 'string') {
