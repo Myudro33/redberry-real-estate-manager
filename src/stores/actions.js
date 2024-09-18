@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { useModalStore } from './modal'
 export default {
   async removeListing(id) {
     await axios.delete(
@@ -12,6 +13,7 @@ export default {
     this.listings = this.listings.filter((item) => item.id != id)
   },
   addAgent(data) {
+    const modalStore = useModalStore()
     const formData = new FormData()
     formData.append('name', data.name)
     formData.append('surname', data.surname)
@@ -23,10 +25,7 @@ export default {
         Authorization: `Bearer 9d016a33-abca-47eb-b541-400bdcf71b68`
       }
     })
-    this.modal = false
-  },
-  changeModal(state) {
-    this.modal = state
+    modalStore.modal = false
   },
   filterListingByRegion(id) {
     this.loading = true

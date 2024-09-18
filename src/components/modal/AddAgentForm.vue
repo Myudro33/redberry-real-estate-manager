@@ -7,6 +7,8 @@ import TheButton from '../TheButton.vue';
 import { agentSchema } from '@/config/vee-validate/rules';
 import { useEstateStore } from '@/stores';
 import { useRouter } from 'vue-router';
+import { useModalStore } from '@/stores/modal';
+const modalStore = useModalStore()
 const router = useRouter()
 const data = ref({
     name: JSON.parse(localStorage.getItem('name')) || "",
@@ -23,7 +25,7 @@ const addAgent = () => {
 
 }
 const closeModal = () => {
-    estateStore.modal = false
+    modalStore.modal = false
 }
 
 </script>
