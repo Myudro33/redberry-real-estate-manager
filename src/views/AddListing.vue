@@ -53,7 +53,9 @@ import { useEstateStore } from '@/stores';
 import { onMounted, ref } from 'vue';
 import TheRadio from '@/components/TheRadio.vue';
 import router from '@/router';
+import { useListingStore } from '@/stores/listings';
 const estateStore = useEstateStore()
+const listingStore = useListingStore()
 const agentError = ref(false)
 const data = ref({
     listing_type: JSON.parse(localStorage.getItem('deal')) || "",
@@ -85,7 +87,7 @@ const setAgentError = () => {
 }
 function onSubmit() {
     if (agentError.value) {
-        estateStore.addListing(data.value)
+        listingStore.addListing(data.value)
         router.push({ name: 'home' })
         localStorage.clear()
     }

@@ -3,13 +3,13 @@ import TheButton from './TheButton.vue';
 import TheFilters from './filter/TheFilters.vue';
 import RegionFilter from './filter/RegionFilter.vue';
 import FilterBy from './filter/FilterBy.vue';
-import { useEstateStore } from '@/stores';
 import PriceAndAreaFilter from './filter/PriceAndAreaFilter.vue';
 import BedroomFilter from './filter/BedroomFilter.vue';
 import { useRoute } from 'vue-router';
 import { watch } from 'vue';
+import { useListingStore } from '@/stores/listings';
 const route = useRoute()
-const estateStore = useEstateStore()
+const listingStore = useListingStore()
 const emits = defineEmits(['bedroomQuantity', 'region', 'price', 'area'])
 const submit = (e) => {
     emits('bedroomQuantity', e)
@@ -48,24 +48,24 @@ watch(() => route.query, () => {
     <div class="w-full  mt-20">
         <div class="w-full h-12 flex items-center justify-between">
             <div class="font-bold flex items-center relative rounded-lg border border-border-color ">
-                <FilterBy @click="estateStore.filterBy('region')"
-                    :class="[estateStore.filter.region ? 'bg-active-filter' : '']" title="რეგიონი"
-                    :filter-by="estateStore.filter.region" />
-                <RegionFilter @region="filterRegion" v-if="estateStore.filter.region" />
-                <FilterBy @click="estateStore.filterBy('price')"
-                    :class="[estateStore.filter.price ? 'bg-active-filter' : '']" title="საფასო კატეგორია"
-                    :filter-by="estateStore.filter.price" />
-                <PriceAndAreaFilter @filter-price-or-area="filterPrice" v-if="estateStore.filter.price"
+                <FilterBy @click="listingStore.filterBy('region')"
+                    :class="[listingStore.filter.region ? 'bg-active-filter' : '']" title="რეგიონი"
+                    :filter-by="listingStore.filter.region" />
+                <RegionFilter @region="filterRegion" v-if="listingStore.filter.region" />
+                <FilterBy @click="listingStore.filterBy('price')"
+                    :class="[listingStore.filter.price ? 'bg-active-filter' : '']" title="საფასო კატეგორია"
+                    :filter-by="listingStore.filter.price" />
+                <PriceAndAreaFilter @filter-price-or-area="filterPrice" v-if="listingStore.filter.price"
                     filter-type="price" />
-                <FilterBy @click="estateStore.filterBy('area')"
-                    :class="[estateStore.filter.area ? 'bg-active-filter' : '']" title="ფართობი"
-                    :filter-by="estateStore.filter.area" />
-                <PriceAndAreaFilter @filter-price-or-area="filterArea" v-if="estateStore.filter.area"
+                <FilterBy @click="listingStore.filterBy('area')"
+                    :class="[listingStore.filter.area ? 'bg-active-filter' : '']" title="ფართობი"
+                    :filter-by="listingStore.filter.area" />
+                <PriceAndAreaFilter @filter-price-or-area="filterArea" v-if="listingStore.filter.area"
                     filter-type="area" />
-                <FilterBy @click="estateStore.filterBy('bedrooms')"
-                    :class="[estateStore.filter.bedrooms ? 'bg-active-filter' : '']" title="საძინებლების რაოდენობა"
-                    :filter-by="estateStore.filter.bedrooms" />
-                <BedroomFilter @bedrooms="submit" v-if="estateStore.filter.bedrooms" />
+                <FilterBy @click="listingStore.filterBy('bedrooms')"
+                    :class="[listingStore.filter.bedrooms ? 'bg-active-filter' : '']" title="საძინებლების რაოდენობა"
+                    :filter-by="listingStore.filter.bedrooms" />
+                <BedroomFilter @bedrooms="submit" v-if="listingStore.filter.bedrooms" />
             </div>
             <div>
                 <TheButton router-to="add-listing" type="link" :background="true" :title="'+ ლისტინგის დამატება'" />

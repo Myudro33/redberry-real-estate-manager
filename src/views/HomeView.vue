@@ -2,8 +2,10 @@
 import ListingCard from '@/components/ListingCard.vue';
 import TheNavbar from '@/components/TheNavbar.vue';
 import { useEstateStore } from '@/stores';
+import { useListingStore } from '@/stores/listings';
 import { computed, onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
+const listingStore = useListingStore()
 const router = useRoute()
 const estateStore = useEstateStore()
 const bedrooms = ref(router.query.bedrooms || "")
@@ -11,11 +13,11 @@ const regions = ref(router.query.regions || [])
 const price = ref({ min: router.query.min_price || 0, max: router.query.max_price || 0 })
 const area = ref({ min: router.query.min_area || 0, max: router.query.max_area || 0 })
 onMounted(() => {
-  estateStore.getListing()
+  listingStore.getListing()
   estateStore.getRegions()
 })
 const filteredListings = computed(() => {
-  let listings = estateStore.listings
+  let listings = listingStore.listings
   if (bedrooms.value !== '') {
     listings = listings.filter((item) => item.bedrooms == bedrooms.value)
   }

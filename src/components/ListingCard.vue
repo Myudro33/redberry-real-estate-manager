@@ -38,12 +38,12 @@ import AreaIcon from './icons/AreaIcon.vue';
 import BedIcon from './icons/BedIcon.vue';
 import LocationIcon from './icons/LocationIcon.vue';
 import PostIcon from './icons/PostIcon.vue';
-import { useEstateStore } from '@/stores';
+import { useListingStore } from '@/stores/listings';
 const router = useRouter()
-const estateStore = useEstateStore()
+const listingStore = useListingStore()
 const props = defineProps(['id', 'deal', 'image', 'price', 'location', 'bedrooms', 'area', 'postalCode', 'city'])
 const openListing = () => {
-    estateStore.getSingleListing(props.id)
+    listingStore.getSingleListing(props.id)
     router.push({ name: 'inner-page', params: { id: props.id } })
 }
 </script>

@@ -54,21 +54,23 @@ import { useEstateStore } from '@/stores';
 import useLocalStorage from '@/composables/useLocalStorage';
 const props = defineProps(['name', 'rules', 'label', 'modelValue', 'border'])
 const emit = defineEmits(['update:modelValue', 'agent']);
+const modalStore = useModalStore()
 import { ref } from 'vue';
 import ArrowDown from './icons/ArrowDown.vue';
 import PlusIcon from './icons/PlusIcon.vue';
 import router from '@/router';
+import { useModalStore } from '@/stores/modal';
 const isOpen = ref(false);
 const selectedOption = ref(JSON.parse(localStorage.getItem('agent')) || "");
 
 const agentModal = () => {
-    estateStore.changeModal('agent')
+    modalStore.changeModal('agent')
     router.push({ query: { modal: 'agent' } })
 }
 
 const change = (e) => {
     if (e.target.value === 'agent') {
-        estateStore.changeModal('agent')
+        modalStore.changeModal('agent')
     }
     emit('update:modelValue', e.target.value)
     useLocalStorage(e.target.value, props.name)
