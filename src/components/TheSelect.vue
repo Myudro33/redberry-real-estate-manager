@@ -1,23 +1,28 @@
 <template>
     <div class="flex h-20 flex-col">
         <label class="font-semibold text-sm" :for="props.name">{{ props.label }}</label>
-        <Field v-if="props.label == 'რეგიონი'" as="select" type="select" validate-on-input
-            class="h-11 p-2 shrink-0 rounded-lg border border-border-color" :name="props.name" :value="modelValue"
-            @input="selectRegion" @change="change">
-            <option value="" selected disabled>Select a region</option>
-            <option v-for="region in estateStore.regions" :key="region.id" :value="region.id">
-                {{ region.name }}</option>
+        <Field v-slot="{ field, meta }" v-if="props.label == 'რეგიონი'" validate-on-input :name="props.name"
+            :value="modelValue" @input="selectRegion" @change="change">
+            <select :class="{ 'border border-error': meta.touched && !meta.valid }"
+                class="h-11 p-2 shrink-0 rounded-lg border border-border-color" v-bind="field">
+                <option value="" selected disabled>Select a region</option>
+                <option v-for="region in estateStore.regions" :key="region.id" :value="region.id">
+                    {{ region.name }}</option>
+            </select>
         </Field>
-        <Field @change="change" v-else-if="props.label == 'ქალაქი'" as="select" validate-on-input
-            class="h-11 p-2 shrink-0 rounded-lg border border-border-color" :name="props.name" :value="modelValue">
-            <option value="" selected disabled>Select a city</option>
-            <option v-for="city in estateStore.cities" :key="city.id" :value="city.id">
-                {{ city.name }}</option>
+        <Field v-slot="{ field, meta }" @change="change" v-else-if="props.label == 'ქალაქი'" validate-on-input
+            :name="props.name" :value="modelValue">
+            <select :class="{ 'border border-error': meta.touched && !meta.valid }"
+                class="h-11 p-2 shrink-0 rounded-lg border border-border-color" v-bind="field">
+                <option value="" selected disabled>Select a city</option>
+                <option v-for="city in estateStore.cities" :key="city.id" :value="city.id">
+                    {{ city.name }}</option>
+            </select>
         </Field>
-        <Field @change="change" v-else validate-on-input
-            class="h-11 p-10 shrink-0 rounded-lg border border-border-color" :name="props.name" :value="modelValue">
-            <div class="custom-select">
-                <button type="button" @click="toggleDropdown" class="dropdown-toggle">
+        <Field @change="change" v-else validate-on-input class="h-11 p-10 shrink-0 rounded-lg " :name="props.name"
+            :value="modelValue">
+            <div :class="{ 'border border-error rounded-lg': props.border }" class="relative inline-block w-full ">
+                <button type="button" @click="toggleDropdown" class="dropdown-toggle ">
                     {{ selectedOption ? selectedOption : 'აირჩიეთ აგენტი' }}
                     <ArrowDown />
                 </button>
@@ -31,7 +36,7 @@
                         </div>
                     </li>
                     <li v-for="agent in estateStore.agents" :key="agent.id" @click="selectOption(agent)"
-                        class="dropdown-item">
+                        class="dropdown-item border border-border-color">
                         <div>
                             <span class="text-black">{{ agent.name }}</span>
                         </div>
@@ -47,7 +52,7 @@
 import { ErrorMessage, Field } from 'vee-validate';
 import { useEstateStore } from '@/stores';
 import useLocalStorage from '@/composables/useLocalStorage';
-const props = defineProps(['name', 'rules', 'label', 'modelValue'])
+const props = defineProps(['name', 'rules', 'label', 'modelValue', 'border'])
 const emit = defineEmits(['update:modelValue', 'agent']);
 import { ref } from 'vue';
 import ArrowDown from './icons/ArrowDown.vue';
@@ -91,6 +96,7 @@ const selectOption = (option) => {
     position: relative;
     display: inline-block;
     width: 100%;
+    /* border: 1px solid red; */
 }
 
 .dropdown-toggle {
@@ -110,10 +116,11 @@ const selectOption = (option) => {
     top: 100%;
     left: 0;
     width: 100%;
-    height: 200px;
+    height: 150px;
     overflow: scroll;
     border: 1px solid #ccc;
     border-radius: 8px;
+    background-color: white;
     list-style: none;
     padding: 0;
     margin: 0;
