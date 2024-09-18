@@ -30,10 +30,12 @@
                 <TheFileInput v-model="data.file" name="file" />
             </div>
             <h1 class="mt-20 font-medium text-base">აგენტი</h1>
-            <TheSelect v-model="data.agent" class="w-[24rem] mt-2 " label="აირჩიე" name="agent" />
+            <TheSelect @agent="getAgent" v-model="data.agent" class="w-[24rem] h-[4.5rem] mt-2 " label="აირჩიე"
+                name="agent" />
+            <p v-if="agentError" class="text-error">აგენტი სავალდებულოა</p>
             <div class="w-full flex justify-end mt-10">
                 <TheButton router-to="home" type="link" title="გაუქმება" />
-                <TheButton class="ml-4" :background="true" title="დამატე ლისტინგი" />
+                <TheButton @click="test" class="ml-4" :background="true" title="დამატე ლისტინგი" />
             </div>
         </Form>
     </div>
@@ -52,6 +54,7 @@ import { onMounted, ref } from 'vue';
 import TheRadio from '@/components/TheRadio.vue';
 import router from '@/router';
 const estateStore = useEstateStore()
+const agentError = ref(false)
 const data = ref({
     listing_type: JSON.parse(localStorage.getItem('deal')) || "",
     address: JSON.parse(localStorage.getItem('address')) || "",
@@ -73,9 +76,18 @@ onMounted(() => {
         estateStore.getCities()
     }
 })
+const getAgent = (e) => {
+    data.value.agent = e.name
+
+}
+const test = () => {
+    data.value.agent ? agentError.value = false : agentError.value = true
+}
 function onSubmit() {
-    estateStore.addListing(data.value)
-    router.push({ name: 'home' })
-    localStorage.clear()
+    if (agentError.value) {
+        estateStore.addListing(data.value)
+        router.push({ name: 'home' })
+        localStorage.clear()
+    }
 }
 </script>

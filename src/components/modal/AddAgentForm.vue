@@ -40,7 +40,7 @@ const closeModal = () => {
                 <TheFileInput v-model="data.file" name="file" />
             </div>
             <div class="w-full flex justify-end mt-20">
-                <TheButton @click="closeModal" router-to="home" type="link" title="გაუქმება" />
+                <TheButton @click="closeModal" type="link" title="გაუქმება" />
                 <TheButton class="ml-4" :background="true" title="დამატე აგენტი" query="" />
             </div>
         </Form>

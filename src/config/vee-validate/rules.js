@@ -90,7 +90,7 @@ export const schema = {
     return true
   },
   price: (value) => {
-    if (value) {
+    if (!value) {
       return 'ფასი სავალდებულოა'
     } else if (isNaN(value) || value.trim() === '') {
       return 'უნდა შედგებოდეს რიცხვებისგან'
@@ -119,11 +119,12 @@ export const schema = {
     }
     const wordCount = value.trim().split(/\s+/).length
     return wordCount > 4 ? true : `უნდა იყოს 5 სიტყვაზე მეტი`
-  },
-  agent: (value) => {
-    if (value) {
-      return true
-    }
-    return 'აგენტი სავალდებულოა'
   }
+  // agent: (value) => {
+  //   console.log(value, 'rules')
+  //   if (value) {
+  //     return true
+  //   }
+  //   return 'აგენტი სავალდებულოა'
+  // }
 }
