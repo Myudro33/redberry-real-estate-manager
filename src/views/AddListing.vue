@@ -35,7 +35,7 @@
             <p v-if="agentError" class="text-error">აგენტი სავალდებულოა</p>
             <div class="w-full flex justify-end mt-10">
                 <TheButton router-to="home" type="link" title="გაუქმება" />
-                <TheButton @click="test" class="ml-4" :background="true" title="დამატე ლისტინგი" />
+                <TheButton @click="setAgentError" class="ml-4" :background="true" title="დამატე ლისტინგი" />
             </div>
         </Form>
     </div>
@@ -80,7 +80,7 @@ const getAgent = (e) => {
     data.value.agent = e.name
 
 }
-const test = () => {
+const setAgentError = () => {
     data.value.agent ? agentError.value = false : agentError.value = true
 }
 function onSubmit() {

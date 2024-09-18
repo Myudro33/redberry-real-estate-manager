@@ -32,10 +32,10 @@ const closeModal = () => {
     <div class="w-[63rem] h-[49rem] bg-white rounded-xl shadow-md flex flex-col items-center py-20 px-[6.56rem]">
         <h1 class="text-[2rem] font-medium">აგენტის დამატება</h1>
         <Form @submit="addAgent" :validation-schema="agentSchema" class="mt-[3.8rem] w-full flex flex-wrap gap-4">
-            <TheInput v-model="data.name" class="w-[24rem] h-24  mt-2" label="სახელი *" name="name" />
-            <TheInput v-model="data.surname" class="w-[24rem] h-24 mt-2" label="გვარი *" name="surname" />
-            <TheInput v-model="data.email" class="w-[24rem] h-24 mt-2" label="ელ-ფოსტა *" name="email" />
-            <TheInput v-model="data.number" class="w-[24rem] h-24 mt-2" label="ტელეფონის ნომერი *" name="number" />
+            <TheInput v-model="data.name" class="w-[24rem] h-24  mt-2" label="სახელი " name="name" />
+            <TheInput v-model="data.surname" class="w-[24rem] h-24 mt-2" label="გვარი " name="surname" />
+            <TheInput v-model="data.email" class="w-[24rem] h-24 mt-2" label="ელ-ფოსტა " name="email" />
+            <TheInput v-model="data.number" class="w-[24rem] h-24 mt-2" label="ტელეფონის ნომერი " name="number" />
             <div class="w-full h-24 mt-8">
                 <TheFileInput v-model="data.file" name="file" />
             </div>
