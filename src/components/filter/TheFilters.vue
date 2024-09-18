@@ -113,10 +113,10 @@ watch(() => route.query, () => {
 <template>
     <div class="mt-4 flex items-center gap-2 ">
         <FilterCard v-if="bedroomFilter" :function="removeBedroomFilter" :title="bedroomFilter" />
-        <FilterCard v-if="areaFilter.min !== 0 && areaFilter.max !== 0" :function="removeAreaFilter" :title="`${priceFilter.min || 0} ₾
-            - ${priceFilter.max || '∞'} ₾`" />
-        <FilterCard v-if="priceFilter.min !== 0 && priceFilter.max !== 0" :function="removePriceFilter" :title="`${areaFilter.min || 0} მ²
+        <FilterCard v-if="areaFilter.min !== 0 && areaFilter.max !== 0" :function="removeAreaFilter" :title="`${areaFilter.min || 0} მ²
             - ${areaFilter.max || '∞'} მ²`" />
+        <FilterCard v-if="priceFilter.min !== 0 && priceFilter.max !== 0" :function="removePriceFilter" :title="`${priceFilter.min || 0} ₾
+            - ${priceFilter.max || '∞'} ₾`" />
         <div class="flex gap-2" v-if="typeof regionFilter == 'object'">
             <span v-for="(items, index) in regionFilter" :key="index"
                 class="flex items-center  rounded-3xl border border-border-color px-2 py-1">{{ items }}
