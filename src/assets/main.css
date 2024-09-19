@@ -5,3 +5,26 @@
 input[type='checkbox'] {
   accent-color: #45a849;
 }
+input[type='radio'] {
+  accent-color: #000;
+}
+::-webkit-scrollbar {
+  display: none;
+}
+
+@font-face {
+  font-family: 'FiraGO';
+  src:
+    url('fonts/FiraGO-Medium.ttf') format('ttf'),
+    url('fonts/FiraGO-Medium.ttf') format('ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'helvetica';
+  src:
+    url('fonts/HelveticaNeueMedium.ttf') format('ttf'),
+    url('fonts/HelveticaNeueMedium.ttf') format('ttf');
+  font-weight: normal;
+  font-style: normal;
+}

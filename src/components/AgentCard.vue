@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full h-[10.875rem] mt-[3.12rem] border border-border-color rounded-lg py-6 px-5">
+    <div class="w-full font-firago h-[10.875rem] mt-[3.12rem] border border-border-color rounded-lg py-6 px-5">
         <div class="flex">
             <img class="w-[4.5rem] h-[4.5rem] rounded-full object-cover" :src="props.agent.avatar" alt="agent-avatar">
             <div class="ml-2">

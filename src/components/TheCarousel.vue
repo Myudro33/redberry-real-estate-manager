@@ -1,5 +1,5 @@
 <template>
-    <h1 v-if="!estateStore.filteredListing.length > 0" class="text-[#021526] text-[2rem] mt-10 font-medium">ბინები
+    <h1 v-if="!listingStore.filteredListing.length > 0" class="text-[#021526] text-[2rem] mt-10 font-medium">ბინები
         მსგავს
         ლოკაციაზე არ მოიძებნა</h1>
     <div v-else class="mt-[4.19rem] w-full relative">
@@ -23,12 +23,12 @@
 </template>
 
 <script setup>
-import { useEstateStore } from '@/stores';
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue';
 import ListingCard from './ListingCard.vue';
 import ArrowIcon from './icons/ArrowIcon.vue';
-const estateStore = useEstateStore()
-const items = ref(estateStore.filteredListing);
+import { useListingStore } from '@/stores/listings';
+const listingStore = useListingStore()
+const items = ref(listingStore.filteredListing);
 const currentIndex = ref(0);
 const translateX = ref(0);
 const itemWidth = 380;

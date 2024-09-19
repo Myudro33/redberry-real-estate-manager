@@ -12,14 +12,13 @@
 </template>
 
 <script setup>
-import { useEstateStore } from '@/stores';
 import DeleteIcon from '../icons/DeleteIcon.vue';
 import TheButton from '../TheButton.vue';
-import { useRouter } from 'vue-router';
-const estateStore = useEstateStore()
-const router = useRouter()
+import { useModalStore } from '@/stores/modal';
+import router from '@/router';
+const modalStore = useModalStore()
 const closeModal = () => {
-    estateStore.changeModal(false)
+    modalStore.changeModal(false)
     router.push({ query: null })
 }
 </script>

@@ -1,22 +1,25 @@
 <script setup>
-import { RouterView, useRouter } from 'vue-router'
+import { RouterView } from 'vue-router'
 import TheHeader from './components/TheHeader.vue';
 import ModalContainer from './components/modal/ModalContainer.vue';
-import { useEstateStore } from './stores';
 import { onMounted } from 'vue';
-const estateStore = useEstateStore()
-const router = useRouter()
+import { useModalStore } from './stores/modal';
+import router from './router';
+const modalStore = useModalStore()
 onMounted(() => {
   setTimeout(() => {
     if (router.currentRoute.value.query.modal == 'agent') {
-      estateStore.changeModal('agent')
+      modalStore.changeModal('agent')
+    }
+    if (router.currentRoute.value.query.modal == 'remove-listing') {
+      modalStore.changeModal('remove-listing')
     }
   });
 })
 </script>
 
 <template>
-  <div :class="{ 'overflow-hidden h-screen': estateStore.modal }">
+  <div :class="{ 'overflow-hidden h-screen': modalStore.modal }">
     <TheHeader />
     <RouterView />
     <ModalContainer />

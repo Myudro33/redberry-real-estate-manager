@@ -16,6 +16,10 @@ export default {
       },
       boxShadow: {
         'box-shadow': '5px 5px 12px 0px rgba(2, 21, 38, 0.08)'
+      },
+      fontFamily: {
+        firago: ['FiraGO', 'sans-serif'],
+        helvetica: ['Helvetica', 'sans-serif']
       }
     }
   },

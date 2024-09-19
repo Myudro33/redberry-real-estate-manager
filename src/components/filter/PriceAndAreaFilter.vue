@@ -1,11 +1,33 @@
 <script setup>
 import { ref } from 'vue';
 import TheButton from '../TheButton.vue';
+import router from '@/router';
+import { useRoute } from 'vue-router';
+const route = useRoute()
 const props = defineProps(['filterType'])
+const emits = defineEmits(['filterPriceOrArea'])
 const prices = ref({
-    min: '',
-    max: ''
+    min: props.filterType === 'price' ? route.query.min_price || "" : route.query.min_area || "",
+    max: props.filterType === 'price' ? route.query.max_price || "" : route.query.max_area || ""
 })
+const fixedPrices = ref([
+    { price: 50000 }, { price: 100000 }, { price: 150000 }, { price: 200000 }, { price: 300000 }
+])
+
+const setPrice = (type, quantity) => {
+    prices.value[type] = quantity
+}
+
+const submit = () => {
+    if (props.filterType === 'price') {
+        router.push({ query: { ...route.query, min_price: prices.value.min, max_price: prices.value.max } })
+    } else {
+        router.push({
+            query: { ...route.query, min_area: prices.value.min, max_area: prices.value.max }
+        })
+    }
+    emits('filterPriceOrArea', prices.value)
+}
 </script>
 
 <template>
@@ -27,43 +49,25 @@ const prices = ref({
             <div class=" flex flex-col w-2/5 font-normal">
                 <h1 class="font-bold">{{ props.filterType === 'price' ? 'მინ. ფასი' : 'მინ. მ²' }}
                 </h1>
-                <span @click="() => prices.min = 50000" class="mt-2 cursor-pointer">50,000 {{ props.filterType ===
-                    'price' ? '₾' :
-                    'მ²' }}</span>
-                <span @click="() => prices.min = 100000" class="mt-1 cursor-pointer">100,000 {{ props.filterType ===
-                    'price' ? '₾' :
-                    'მ²' }}</span>
-                <span @click="() => prices.min = 150000" class="mt-1 cursor-pointer">150,000 {{ props.filterType ===
-                    'price' ? '₾' :
-                    'მ²' }}</span>
-                <span @click="() => prices.min = 200000" class="mt-1 cursor-pointer">200,000 {{ props.filterType ===
-                    'price' ? '₾' :
-                    'მ²' }}</span>
-                <span @click="() => prices.min = 300000" class="mt-1 cursor-pointer">300,000 {{ props.filterType ===
-                    'price' ? '₾' :
-                    'მ²' }}</span>
+                <span @click="setPrice('min', item.price)" v-for="(item, index) in fixedPrices" :key="index"
+                    class="first:mt-2 mt-1 cursor-pointer">{{
+                        item.price.toLocaleString() }} {{
+                        props.filterType ===
+                            'price' ? '₾' :
+                            'მ²' }}</span>
             </div>
             <div class=" flex flex-col w-2/5 font-normal">
                 <h1 class="font-bold">{{ props.filterType === 'price' ? 'მაქს. ფასი' : 'მინ. მ²' }}</h1>
-                <span @click="() => prices.max = 50000" class="mt-2 cursor-pointer">50,000 {{ props.filterType ===
-                    'price' ? '₾' :
-                    'მ²' }}</span>
-                <span @click="() => prices.max = 100000" class="mt-1 cursor-pointer">100,000 {{ props.filterType ===
-                    'price' ? '₾' :
-                    'მ²' }}</span>
-                <span @click="() => prices.max = 150000" class="mt-1 cursor-pointer">150,000 {{ props.filterType ===
-                    'price' ? '₾' :
-                    'მ²' }}</span>
-                <span @click="() => prices.max = 200000" class="mt-1 cursor-pointer">200,000 {{ props.filterType ===
-                    'price' ? '₾' :
-                    'მ²' }}</span>
-                <span @click="() => prices.max = 300000" class="mt-1 cursor-pointer">300,000 {{ props.filterType ===
-                    'price' ? '₾' :
-                    'მ²' }}</span>
+                <span @click="setPrice('max', item.price)" v-for="(item, index) in fixedPrices" :key="index"
+                    class="first:mt-2 mt-1 cursor-pointer">{{
+                        item.price.toLocaleString() }} {{
+                        props.filterType ===
+                            'price' ? '₾' :
+                            'მ²' }}</span>
             </div>
         </div>
         <div class="w-full flex justify-end mt-auto">
-            <TheButton :background="true" title="არჩევა" />
+            <TheButton @click="submit" :background="true" title="არჩევა" />
         </div>
     </div>
 </template>

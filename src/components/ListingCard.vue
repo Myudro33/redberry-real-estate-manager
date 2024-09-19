@@ -1,6 +1,6 @@
 <template>
     <div @click="openListing"
-        class="w-96 z-0 h-[28rem] flex flex-col relative rounded-lg border border-border-color transition-all hover:shadow-lg overflow-hidden">
+        class="w-96 font-firago z-0 h-[28rem] flex flex-col relative rounded-lg border border-border-color transition-all hover:shadow-lg overflow-hidden">
         <img class="h-72 object-fill" :src="props.image" alt="listing-image">
         <span
             class="absolute left-5 top-5 flex justify-center items-center text-white font-medium  h-7 p-4 rounded-2xl bg-deal-type">{{
@@ -33,17 +33,16 @@
 
 
 <script setup>
-import { useRouter } from 'vue-router';
+import router from '@/router';
 import AreaIcon from './icons/AreaIcon.vue';
 import BedIcon from './icons/BedIcon.vue';
 import LocationIcon from './icons/LocationIcon.vue';
 import PostIcon from './icons/PostIcon.vue';
-import { useEstateStore } from '@/stores';
-const router = useRouter()
-const estateStore = useEstateStore()
+import { useListingStore } from '@/stores/listings';
+const listingStore = useListingStore()
 const props = defineProps(['id', 'deal', 'image', 'price', 'location', 'bedrooms', 'area', 'postalCode', 'city'])
 const openListing = () => {
-    estateStore.getSingleListing(props.id)
+    listingStore.getSingleListing(props.id)
     router.push({ name: 'inner-page', params: { id: props.id } })
 }
 </script>

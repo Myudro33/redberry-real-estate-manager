@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full flex flex-col items-center p-14 mt-14">
+    <div class="w-full flex flex-col items-center p-14 mt-14 font-helvetica">
         <h1 class="text-center text-[2rem] font-semibold">ლისტინგის დამატება</h1>
         <Form :validation-schema="schema" class="w-[49.3rem] mt-14" @submit="onSubmit">
             <div>
@@ -14,26 +14,28 @@
             </div>
             <h1 class="mt-20 font-medium text-base">მდებარეობა</h1>
             <div class="flex justify-between flex-wrap mt-6">
-                <TheInput v-model="data.address" class="w-[24rem] mt-2" label="მისამართი *" name="address" />
-                <TheInput v-model="data.postalCode" class="w-[24rem] mt-2 " label="საფოსტო ინდექსი *"
+                <TheInput v-model="data.address" class="w-[24rem] mt-2" label="მისამართი " name="address" />
+                <TheInput v-model="data.postalCode" class="w-[24rem] mt-2 " label="საფოსტო ინდექსი "
                     name="postalCode" />
                 <TheSelect v-model="data.region" class="w-[24rem] mt-2 " label="რეგიონი" name="region" />
                 <TheSelect v-model="data.city" class="w-[24rem] mt-2 " label="ქალაქი" name="city" />
             </div>
             <h1 class="mt-20 font-medium text-base">ბინის დეტალები</h1>
             <div class="flex justify-between flex-wrap">
-                <TheInput v-model="data.price" class="w-[24rem] mt-2" label="ფასი *" name="price" />
-                <TheInput v-model="data.area" class="w-[24rem] mt-2 " label="ფართობი *" name="area" />
-                <TheInput v-model="data.bedrooms" class="w-[24rem] mt-5 " label="საძინებლების რაოდენობა *"
+                <TheInput v-model="data.price" class="w-[24rem] mt-2" label="ფასი " name="price" />
+                <TheInput v-model="data.area" class="w-[24rem] mt-2 " label="ფართობი " name="area" />
+                <TheInput v-model="data.bedrooms" class="w-[24rem] mt-5 " label="საძინებლების რაოდენობა "
                     name="bedrooms" />
-                <TheTextarea v-model="data.description" class="w-full mt-5" label="აღწერა *" name="description" />
+                <TheTextarea v-model="data.description" class="w-full mt-5" label="აღწერა " name="description" />
                 <TheFileInput v-model="data.file" name="file" />
             </div>
             <h1 class="mt-20 font-medium text-base">აგენტი</h1>
-            <TheSelect v-model="data.agent" class="w-[24rem] mt-2 " label="აირჩიე" name="agent" />
+            <TheSelect @agent="getAgent" v-model="data.agent" class="w-[24rem] h-[4.5rem] mt-2 " label="აირჩიე"
+                name="agent" :border="agentError" />
+            <p v-if="agentError" class="text-error">აგენტი სავალდებულოა</p>
             <div class="w-full flex justify-end mt-10">
                 <TheButton router-to="home" type="link" title="გაუქმება" />
-                <TheButton class="ml-4" :background="true" title="დამატე ლისტინგი" />
+                <TheButton @click="setAgentError" class="ml-4" :background="true" title="დამატე ლისტინგი" />
             </div>
         </Form>
     </div>
@@ -50,8 +52,11 @@ import TheButton from '@/components/TheButton.vue';
 import { useEstateStore } from '@/stores';
 import { onMounted, ref } from 'vue';
 import TheRadio from '@/components/TheRadio.vue';
+import { useListingStore } from '@/stores/listings';
 import router from '@/router';
 const estateStore = useEstateStore()
+const listingStore = useListingStore()
+const agentError = ref(false)
 const data = ref({
     listing_type: JSON.parse(localStorage.getItem('deal')) || "",
     address: JSON.parse(localStorage.getItem('address')) || "",
@@ -73,9 +78,18 @@ onMounted(() => {
         estateStore.getCities()
     }
 })
+const getAgent = (e) => {
+    data.value.agent = e.id
+
+}
+const setAgentError = () => {
+    data.value.agent ? agentError.value = false : agentError.value = true
+}
 function onSubmit() {
-    estateStore.addListing(data.value)
-    router.push({ name: 'home' })
-    localStorage.clear()
+    if (!agentError.value) {
+        listingStore.addListing(data.value)
+        localStorage.clear()
+        router.push({ name: 'home' })
+    }
 }
 </script>
