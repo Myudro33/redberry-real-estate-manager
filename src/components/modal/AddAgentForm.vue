@@ -42,7 +42,7 @@ const closeModal = () => {
             </div>
             <div class="w-full flex justify-end mt-20">
                 <TheButton @click="closeModal" type="link" title="გაუქმება" />
-                <TheButton class="ml-4" :background="true" title="დამატე აგენტი" query="" />
+                <TheButton type="submit" class="ml-4" :background="true" title="დამატე აგენტი" query="agent" />
             </div>
         </Form>
     </div>

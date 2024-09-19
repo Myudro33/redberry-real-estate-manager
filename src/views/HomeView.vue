@@ -65,6 +65,6 @@ const filterByArea = (e) => {
         :deal="items.is_rental" :id="items.id" :image="items.image" :location="items.address"
         :postal-code="items.zip_code" :price="items.price" :city="items.city.name" />
     </div>
-    <h1 class="text-xl font-normal mt-20" v-else>აღნიშნული მონაცემებით განცხადება არ იძებნება</h1>
+    <h1 class="text-xl font-normal text-gray-text mt-20" v-else>აღნიშნული მონაცემებით განცხადება არ იძებნება</h1>
   </div>
 </template>
