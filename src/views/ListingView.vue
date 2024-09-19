@@ -9,15 +9,17 @@ import TheCarousel from '@/components/TheCarousel.vue';
 import { useListingStore } from '@/stores/listings';
 import { useModalStore } from '@/stores/modal';
 import { onMounted } from 'vue';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 const listingStore = useListingStore()
 const router = useRoute()
+const route = useRouter()
 const modalStore = useModalStore()
 onMounted(() => {
     listingStore.getListing()
     listingStore.getSingleListing(router.params.id)
 })
 const openModal = () => {
+    route.push({ query: { modal: 'remove-listing' } })
     modalStore.changeModal('remove-listing')
 }
 </script>

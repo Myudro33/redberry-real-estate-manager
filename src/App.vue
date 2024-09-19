@@ -11,6 +11,9 @@ onMounted(() => {
     if (router.currentRoute.value.query.modal == 'agent') {
       modalStore.changeModal('agent')
     }
+    if (router.currentRoute.value.query.modal == 'remove-listing') {
+      modalStore.changeModal('remove-listing')
+    }
   });
 })
 </script>

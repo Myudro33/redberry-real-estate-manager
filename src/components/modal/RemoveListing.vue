@@ -6,8 +6,7 @@
         <h1 class="text-xl font-normal mt-4">გსურთ წაშალოთ ლისტინგი?</h1>
         <div class="mt-10">
             <TheButton class="ml-4" :background="false" title="გაუქმება" />
-            <TheButton @click="listingStore.removeListing(listingStore.singleListing.id)" class="ml-4"
-                :background="true" title="დადასტურება" query="remove-listing" />
+            <TheButton class="ml-4" :background="true" title="დადასტურება" query="remove-listing" />
         </div>
     </div>
 </template>
@@ -16,9 +15,7 @@
 import DeleteIcon from '../icons/DeleteIcon.vue';
 import TheButton from '../TheButton.vue';
 import { useRouter } from 'vue-router';
-import { useListingStore } from '@/stores/listings';
 import { useModalStore } from '@/stores/modal';
-const listingStore = useListingStore()
 const modalStore = useModalStore()
 const router = useRouter()
 const closeModal = () => {

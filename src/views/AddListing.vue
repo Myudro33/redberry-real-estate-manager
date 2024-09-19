@@ -52,8 +52,8 @@ import TheButton from '@/components/TheButton.vue';
 import { useEstateStore } from '@/stores';
 import { onMounted, ref } from 'vue';
 import TheRadio from '@/components/TheRadio.vue';
-import router from '@/router';
 import { useListingStore } from '@/stores/listings';
+import router from '@/router';
 const estateStore = useEstateStore()
 const listingStore = useListingStore()
 const agentError = ref(false)
@@ -79,17 +79,17 @@ onMounted(() => {
     }
 })
 const getAgent = (e) => {
-    data.value.agent = e.name
+    data.value.agent = e.id
 
 }
 const setAgentError = () => {
     data.value.agent ? agentError.value = false : agentError.value = true
 }
 function onSubmit() {
-    if (agentError.value) {
+    if (!agentError.value) {
         listingStore.addListing(data.value)
-        router.push({ name: 'home' })
         localStorage.clear()
+        router.push({ name: 'home' })
     }
 }
 </script>

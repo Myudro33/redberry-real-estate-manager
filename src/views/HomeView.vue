@@ -60,10 +60,11 @@ const filterByArea = (e) => {
   <div class="w-full px-40 pb-20">
     <TheNavbar @bedroomQuantity="filterByBedrooms" @region="filterByRegions" @price="filterByPrice"
       @area="filterByArea" />
-    <div class="flex flex-wrap gap-3 mt-8">
+    <div v-if="filteredListings.length > 0" class="flex flex-wrap gap-3 mt-8">
       <ListingCard v-for="items in filteredListings" :key="items.id" :area="items.area" :bedrooms="items.bedrooms"
         :deal="items.is_rental" :id="items.id" :image="items.image" :location="items.address"
         :postal-code="items.zip_code" :price="items.price" :city="items.city.name" />
     </div>
+    <h1 class="text-xl font-normal mt-20" v-else>აღნიშნული მონაცემებით განცხადება არ იძებნება</h1>
   </div>
 </template>

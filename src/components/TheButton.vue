@@ -13,9 +13,9 @@ const click = () => {
         router.push({ path: '/', query: { modal: props.query } })
     }
     else if (props.query === 'remove-listing') {
-        listingStore.removeListing(route.params.id)
-        listingStore.changeModal(false)
+        modalStore.changeModal(false)
         router.push({ name: 'home' })
+        listingStore.removeListing(route.params.id)
     }
     else {
         modalStore.changeModal(false)
