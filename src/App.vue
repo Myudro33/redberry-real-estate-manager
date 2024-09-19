@@ -1,10 +1,10 @@
 <script setup>
-import { RouterView, useRouter } from 'vue-router'
+import { RouterView } from 'vue-router'
 import TheHeader from './components/TheHeader.vue';
 import ModalContainer from './components/modal/ModalContainer.vue';
 import { onMounted } from 'vue';
 import { useModalStore } from './stores/modal';
-const router = useRouter()
+import router from './router';
 const modalStore = useModalStore()
 onMounted(() => {
   setTimeout(() => {

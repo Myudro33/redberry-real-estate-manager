@@ -33,13 +33,12 @@
 
 
 <script setup>
-import { useRouter } from 'vue-router';
+import router from '@/router';
 import AreaIcon from './icons/AreaIcon.vue';
 import BedIcon from './icons/BedIcon.vue';
 import LocationIcon from './icons/LocationIcon.vue';
 import PostIcon from './icons/PostIcon.vue';
 import { useListingStore } from '@/stores/listings';
-const router = useRouter()
 const listingStore = useListingStore()
 const props = defineProps(['id', 'deal', 'image', 'price', 'location', 'bedrooms', 'area', 'postalCode', 'city'])
 const openListing = () => {

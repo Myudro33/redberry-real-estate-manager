@@ -7,12 +7,11 @@
 </template>
 
 <script setup>
-import { useRouter } from 'vue-router';
+import router from '@/router';
 import AddAgentForm from './AddAgentForm.vue';
 import RemoveListing from './RemoveListing.vue';
 import { useModalStore } from '@/stores/modal';
 const modalStore = useModalStore()
-const router = useRouter()
 const closeModal = () => {
     router.push({ query: null })
     modalStore.changeModal(false)

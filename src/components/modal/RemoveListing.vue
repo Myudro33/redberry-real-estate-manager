@@ -14,10 +14,9 @@
 <script setup>
 import DeleteIcon from '../icons/DeleteIcon.vue';
 import TheButton from '../TheButton.vue';
-import { useRouter } from 'vue-router';
 import { useModalStore } from '@/stores/modal';
+import router from '@/router';
 const modalStore = useModalStore()
-const router = useRouter()
 const closeModal = () => {
     modalStore.changeModal(false)
     router.push({ query: null })

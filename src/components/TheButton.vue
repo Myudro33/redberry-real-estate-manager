@@ -1,9 +1,9 @@
 <script setup>
 import { useListingStore } from '@/stores/listings';
 import { useModalStore } from '@/stores/modal/index'
-import { useRoute, useRouter } from 'vue-router';
+import { useRoute } from 'vue-router';
+import router from '@/router';
 const props = defineProps(['background', 'title', 'type', 'routerTo', 'query'])
-const router = useRouter()
 const route = useRoute()
 const modalStore = useModalStore()
 const listingStore = useListingStore()

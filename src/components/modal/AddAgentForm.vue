@@ -6,10 +6,9 @@ import TheFileInput from '../TheFileInput.vue';
 import TheButton from '../TheButton.vue';
 import { agentSchema } from '@/config/vee-validate/rules';
 import { useEstateStore } from '@/stores';
-import { useRouter } from 'vue-router';
 import { useModalStore } from '@/stores/modal';
+import router from '@/router';
 const modalStore = useModalStore()
-const router = useRouter()
 const data = ref({
     name: JSON.parse(localStorage.getItem('name')) || "",
     surname: JSON.parse(localStorage.getItem('surname')) || "",
