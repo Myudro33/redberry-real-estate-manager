@@ -57,7 +57,7 @@ const filterByArea = (e) => {
 </script>
 
 <template>
-  <div class="w-full px-40 pb-20">
+  <div class="w-full px-40 pb-20 font-firago">
     <TheNavbar @bedroomQuantity="filterByBedrooms" @region="filterByRegions" @price="filterByPrice"
       @area="filterByArea" />
     <div v-if="filteredListings.length > 0" class="flex flex-wrap gap-3 mt-8">

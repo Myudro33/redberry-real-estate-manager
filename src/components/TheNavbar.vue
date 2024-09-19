@@ -45,7 +45,7 @@ watch(() => route.query, () => {
 
 
 <template>
-    <div class="w-full  mt-20">
+    <div class="w-full  mt-20 font-firago">
         <div class="w-full h-12 flex items-center justify-between">
             <div class="font-bold flex items-center relative rounded-lg border border-border-color ">
                 <FilterBy @click="listingStore.filterBy('region')"

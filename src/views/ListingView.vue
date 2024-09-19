@@ -25,12 +25,12 @@ const openModal = () => {
 </script>
 
 <template>
-    <h1 class="text-5xl text-center font-bold" v-if="listingStore.loading">loading...</h1>
+    <h1 class="text-2xl mt-6 text-center font-bold font-firago" v-if="listingStore.loading">Loading...</h1>
     <div v-else-if="listingStore.singleListing.id" class="px-40 py-16">
         <router-link :to="{ name: 'home' }">
             <ArrowIcon />
         </router-link>
-        <div class="w-full flex  mt-7">
+        <div class="w-full flex  font-firago mt-7">
             <img class="w-[52.4rem] h-[41.8rem] rounded-lg object-fill" :src="listingStore.singleListing.image"
                 alt="listing-image">
             <div class="flex flex-col w-[31.4rem] ml-[4.25rem] text-2xl text-gray-text font-normal">

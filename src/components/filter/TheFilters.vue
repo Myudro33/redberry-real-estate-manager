@@ -111,7 +111,7 @@ watch(() => route.query, () => {
 </script>
 
 <template>
-    <div class="mt-4 flex items-center gap-2 ">
+    <div class="mt-4 flex items-center gap-2 font-firago ">
         <FilterCard v-if="bedroomFilter" :function="removeBedroomFilter" :title="bedroomFilter" />
         <FilterCard v-if="areaFilter.min !== 0 && areaFilter.max !== 0" :function="removeAreaFilter" :title="`${areaFilter.min || 0} მ²
             - ${areaFilter.max || '∞'} მ²`" />

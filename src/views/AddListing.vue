@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full flex flex-col items-center p-14 mt-14">
+    <div class="w-full flex flex-col items-center p-14 mt-14 font-helvetica">
         <h1 class="text-center text-[2rem] font-semibold">ლისტინგის დამატება</h1>
         <Form :validation-schema="schema" class="w-[49.3rem] mt-14" @submit="onSubmit">
             <div>
