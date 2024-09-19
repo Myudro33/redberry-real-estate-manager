@@ -48,7 +48,7 @@ const openModal = () => {
                     <BedIcon class="w-5 mr-2" /> საძინებელი {{ listingStore.singleListing.bedrooms }}
                 </span>
                 <span class="flex items-center mt-4">
-                    <PostIcon class="w-5 mr-2" /> საფოსტო ინდექსი {{ listingStore.singleListing.bedrooms }}
+                    <PostIcon class="w-5 mr-2" /> საფოსტო ინდექსი {{ listingStore.singleListing.zip_code }}
                 </span>
                 <p class="text-base text-gray-text font-normal mt-10 ">{{ listingStore.singleListing.description }}</p>
                 <AgentCard :agent="listingStore.singleListing.agent" />
