@@ -10,10 +10,10 @@ import { useModalStore } from '@/stores/modal';
 import router from '@/router';
 const modalStore = useModalStore()
 const data = ref({
-    name: JSON.parse(localStorage.getItem('name')) || "",
-    surname: JSON.parse(localStorage.getItem('surname')) || "",
-    email: JSON.parse(localStorage.getItem('email')) || "",
-    number: JSON.parse(localStorage.getItem('number')) || "",
+    name: "",
+    surname: "",
+    email: "",
+    number: "",
     file: ""
 })
 const estateStore = useEstateStore()
