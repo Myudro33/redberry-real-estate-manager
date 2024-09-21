@@ -89,6 +89,8 @@ const selectOption = (option) => {
     isOpen.value = false;
     emit('agent', option)
     useLocalStorage(option.name, props.name)
+    useLocalStorage(option.id, 'agent_id')
+
 };
 </script>
 

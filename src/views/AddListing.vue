@@ -68,7 +68,7 @@ const data = ref({
     bedrooms: JSON.parse(localStorage.getItem('bedrooms')) || "",
     description: JSON.parse(localStorage.getItem('description')) || "",
     file: JSON.parse(localStorage.getItem('file')) || "",
-    agent: JSON.parse(localStorage.getItem('agent')) || "",
+    agent: JSON.parse(localStorage.getItem('agent_id')) || "",
 
 })
 onMounted(() => {
