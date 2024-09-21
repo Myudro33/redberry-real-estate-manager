@@ -8,6 +8,7 @@ import BedroomFilter from './filter/BedroomFilter.vue';
 import { useRoute } from 'vue-router';
 import { watch } from 'vue';
 import { useListingStore } from '@/stores/listings';
+import router from '@/router';
 const route = useRoute()
 const listingStore = useListingStore()
 const emits = defineEmits(['bedroomQuantity', 'region', 'price', 'area'])
@@ -40,6 +41,9 @@ watch(() => route.query, () => {
         emits('bedroomQuantity', '')
     }
 }, { immediate: true });
+const addListing = () => {
+    router.push({ name: 'add-listing' })
+}
 </script>
 
 
@@ -68,7 +72,7 @@ watch(() => route.query, () => {
                 <BedroomFilter @bedrooms="submit" v-if="listingStore.filter.bedrooms" />
             </div>
             <div>
-                <TheButton router-to="add-listing" type="link" :background="true" :title="'+ ლისტინგის დამატება'" />
+                <TheButton @click="addListing" :background="true" title="+ ლისტინგის დამატება" />
                 <TheButton class="ml-4" :background="false" :title="'+ აგენტის დამატება'" query="agent" />
             </div>
         </div>

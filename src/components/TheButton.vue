@@ -29,11 +29,11 @@ const clearLocalStorage = () => {
 
 <template>
     <router-link @click="clearLocalStorage" :to="{ name: props.routerTo }" v-if="props.type === 'link'"
-        :class="[props.background ? 'text-white bg-button-background hover:bg-button-background-hover' : 'bg-transparent hover:bg-button-background border border-button-background text-button-background hover:text-white']"
-        class="px-4 py-[10px] h-12 text-base font-medium rounded-[10px]">{{ props.title
+        :class="[props.background ? 'text-white  bg-button-background  hover:bg-button-background-hover' : 'bg-transparent hover:bg-button-background border border-button-background text-button-background hover:text-white']"
+        class="px-4 py-[10px]  text-base font-medium rounded-[10px]"> {{ props.title
         }}</router-link>
     <button @click="click" v-else type="submit"
         :class="[props.background ? 'text-white bg-button-background hover:bg-button-background-hover' : 'bg-transparent hover:bg-button-background border border-button-background text-button-background hover:text-white']"
-        class="px-4 py-[10px] h-12 text-base font-medium rounded-[10px]">{{ props.title }}
+        class="px-4 py-[10px] h-12  text-base font-medium rounded-[10px]">{{ props.title }}
     </button>
 </template>
