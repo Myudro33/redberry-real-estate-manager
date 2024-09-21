@@ -1,6 +1,6 @@
 <template>
     <div class="flex  flex-col">
-        <label class="font-semibold" :for="props.name">{{ props.label }}</label>
+        <label class="font-semibold text-sm" :for="props.name">{{ props.label }} *</label>
         <Field v-slot="{ field, meta }" validate-on-input :name="props.name" :rules="props.rules" @input="change"
             :value="modelValue">
             <textarea v-bind="field" :class="{ 'border border-error': meta.touched && !meta.valid }"

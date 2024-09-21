@@ -27,7 +27,7 @@
                 <TheInput v-model="data.bedrooms" class="w-[24rem] mt-5 " label="საძინებლების რაოდენობა "
                     name="bedrooms" />
                 <TheTextarea v-model="data.description" class="w-full mt-5" label="აღწერა " name="description" />
-                <TheFileInput v-model="data.file" name="file" />
+                <TheFileInput @select-file="getImage" v-model="data.file" name="file" />
             </div>
             <h1 class="mt-20 font-medium text-base">აგენტი</h1>
             <TheSelect @agent="getAgent" v-model="data.agent" class="w-[24rem] h-[4.5rem] mt-2 " label="აირჩიე"
@@ -57,6 +57,7 @@ import router from '@/router';
 const estateStore = useEstateStore()
 const listingStore = useListingStore()
 const agentError = ref(false)
+
 const data = ref({
     listing_type: JSON.parse(localStorage.getItem('deal')) || "",
     address: JSON.parse(localStorage.getItem('address')) || "",
@@ -67,10 +68,12 @@ const data = ref({
     area: JSON.parse(localStorage.getItem('area')) || "",
     bedrooms: JSON.parse(localStorage.getItem('bedrooms')) || "",
     description: JSON.parse(localStorage.getItem('description')) || "",
-    file: JSON.parse(localStorage.getItem('file')) || "",
+    file: "",
     agent: JSON.parse(localStorage.getItem('agent_id')) || "",
-
 })
+const getImage = (e) => {
+    data.value.file = e
+}
 onMounted(() => {
     estateStore.getAgents()
     estateStore.getRegions()

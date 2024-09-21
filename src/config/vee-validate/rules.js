@@ -37,9 +37,9 @@ export const agentSchema = {
   },
   file: (value) => {
     if (!value) return 'აირჩიეთ ფაილი'
-    else if (typeof value !== 'string') {
-      const fileSizeMB = value[0].size / (1024 * 1024)
-      return fileSizeMB <= 1 ? true : `სურათი უნდა იყოს 1მბ-ზე ნაკლები`
+    else if (value.size) {
+      const fileSize = value.size / (1024 * 1024)
+      return fileSize <= 1 ? true : `სურათი უნდა იყოს 1მბ-ზე ნაკლები`
     }
     return true
   }
@@ -54,9 +54,9 @@ export const schema = {
   },
   file: (value) => {
     if (!value) return 'აირჩიეთ ფაილი'
-    else if (typeof value !== 'string') {
-      const fileSizeMB = value[0].size / (1024 * 1024)
-      return fileSizeMB <= 1 ? true : `სურათი უნდა იყოს 1მბ-ზე ნაკლები`
+    else if (value.size) {
+      const fileSize = value.size / (1024 * 1024)
+      return fileSize <= 1 ? true : `სურათი უნდა იყოს 1მბ-ზე ნაკლები`
     }
     return true
   },
@@ -120,11 +120,4 @@ export const schema = {
     const wordCount = value.trim().split(/\s+/).length
     return wordCount > 4 ? true : `უნდა იყოს 5 სიტყვაზე მეტი`
   }
-  // agent: (value) => {
-  //   console.log(value, 'rules')
-  //   if (value) {
-  //     return true
-  //   }
-  //   return 'აგენტი სავალდებულოა'
-  // }
 }

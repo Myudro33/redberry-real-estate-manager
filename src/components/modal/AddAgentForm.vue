@@ -14,7 +14,7 @@ const data = ref({
     surname: JSON.parse(localStorage.getItem('surname')) || "",
     email: JSON.parse(localStorage.getItem('email')) || "",
     number: JSON.parse(localStorage.getItem('number')) || "",
-    file: JSON.parse(localStorage.getItem('file')) || ""
+    file: ""
 })
 const estateStore = useEstateStore()
 const addAgent = () => {
@@ -22,6 +22,9 @@ const addAgent = () => {
     localStorage.clear()
     router.push({ name: 'home' })
 
+}
+const getImage = (e) => {
+    data.value.file = e
 }
 const closeModal = () => {
     modalStore.modal = false
@@ -38,7 +41,7 @@ const closeModal = () => {
             <TheInput v-model="data.email" class="w-[24rem] h-24 mt-2" label="ელ-ფოსტა " name="email" />
             <TheInput v-model="data.number" class="w-[24rem] h-24 mt-2" label="ტელეფონის ნომერი " name="number" />
             <div class="w-full h-24 mt-8">
-                <TheFileInput v-model="data.file" name="file" />
+                <TheFileInput @select-file="getImage" v-model="data.file" name="file" />
             </div>
             <div class="w-full flex justify-end mt-20">
                 <TheButton @click="closeModal" type="link" title="გაუქმება" />
