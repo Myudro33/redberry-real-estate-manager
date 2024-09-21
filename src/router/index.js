@@ -1,7 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '@/views/HomeView.vue'
-import AddListing from '@/views/AddListing.vue'
-import ListingView from '@/views/ListingView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -9,17 +6,22 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: HomeView
+      component: () => import('../views/HomeView.vue')
     },
     {
       path: '/add-listing',
       name: 'add-listing',
-      component: AddListing
+      component: () => import('../views/AddListing.vue')
     },
     {
       path: '/listing/:id',
       name: 'inner-page',
-      component: ListingView
+      component: () => import('../views/ListingView.vue')
+    },
+    {
+      path: '/:catchAll(.*)',
+      name: 'notFound',
+      component: () => import('../views/NotFound.vue')
     }
   ]
 })
