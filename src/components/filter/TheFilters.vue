@@ -96,15 +96,21 @@ watch(() => route.query, () => {
         removeButton.value = true
         areaFilter.value.min = route.query.min_area
         areaFilter.value.max = route.query.max_area
+    } else {
+        removeAreaFilter()
     }
     if (route.query.min_price || route.query.max_price) {
         removeButton.value = true
         priceFilter.value.min = route.query.min_price
         priceFilter.value.max = route.query.max_price
+    } else {
+        removePriceFilter()
     }
     if (route.query.regions?.length > 0) {
         removeButton.value = true
         regionFilter.value = route.query.regions
+    } else {
+        removeSingleRegion()
     }
 }, { deep: true });
 

@@ -9,6 +9,11 @@ const emits = defineEmits('')
 const submit = () => {
     if (inputValue.value > 0) {
         router.push({ query: { ...route.query, bedrooms: inputValue.value } })
+    } else {
+        const { bedrooms, ...remainingQuery } = route.query;
+        router.push({
+            query: remainingQuery
+        });
     }
     emits('bedrooms', inputValue.value)
 }
