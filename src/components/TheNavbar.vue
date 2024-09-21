@@ -30,10 +30,11 @@ watch(() => route.query, () => {
     }
     if (route.query.regions) {
         emits('region', route.query.regions)
+    } else if (route.query.regions === undefined) {
+        emits('region', [])
     }
     if (route.query.min_price !== 0 || route.query.max_price) {
         emits('price', { min: route.query.min_price || 0, max: route.query.max_price || 0 })
-
     }
     if (route.query.bedrooms !== undefined || !typeof route.query.bedrooms) {
         emits('bedroomQuantity', route.query.bedrooms)
